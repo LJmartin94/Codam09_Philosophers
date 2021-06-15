@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/06/15 16:59:53 by lindsay       ########   odam.nl          #
+#    Updated: 2021/06/15 18:47:02 by lindsay       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = philo
 ROOT_DIR = ./
 
 SRC_PATH = $(ROOT_DIR)srcs/
+
+UTILS_PATH = $(SRC_PATH)utils/
 
 INCL_PATH = $(ROOT_DIR)incl/
 
@@ -29,6 +31,9 @@ HEADER_FILES = $(INCL_PATH)
 #Source files mandatory part
 SRC = $(SRC_PATH)main.c \
 	$(SRC_PATH)input_management.c \
+	$(UTILS_PATH)conversions.c \
+	$(UTILS_PATH)e_malloc.c \
+	$(UTILS_PATH)strcmp.c \
 	
 
 #Object files
