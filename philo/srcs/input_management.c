@@ -6,11 +6,18 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/06/15 18:58:16 by lindsay       ########   odam.nl         */
+/*   Updated: 2021/06/16 15:49:59 by lindsay       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static int invalid_arg(void)
+{
+	printf("Error: Invalid argument passed. \n\
+All arguments should be greater than or equal to zero\n");
+	return (1);
+}
 
 static int incorrect_arg_format(char *arg)
 {
@@ -22,7 +29,7 @@ static int incorrect_arg_format(char *arg)
 
 static int incorrect_num_of_args(void)
 {
-	printf("Incorrect number of arguments specified.\n\
+	printf("Error: Incorrect number of arguments specified.\n\
 You must supply 4 5 arguments, namely:\n \
 	1) number_of_philosophers\n \
 	2) time_to_die\n \
@@ -34,17 +41,23 @@ You must supply 4 5 arguments, namely:\n \
 
 int ft_error_checker(int argc, char **argv, t_data *d)
 {
+	d->number_of_times_each_philosopher_must_eat = -1;
 	if (argc < 5 || argc > 6)
 		return (incorrect_num_of_args());
 	if (atoi_error(argv[1], &(d->number_of_philosophers)))
 		return (incorrect_arg_format(argv[1]));
-	if (atoi_error(argv[2], &(d->number_of_philosophers)))
+	if (atoi_error(argv[2], &(d->time_to_die)))
 		return (incorrect_arg_format(argv[2]));	
-	if (atoi_error(argv[3], &(d->number_of_philosophers)))
+	if (atoi_error(argv[3], &(d->time_to_eat)))
 		return (incorrect_arg_format(argv[3]));
-	if (atoi_error(argv[4], &(d->number_of_philosophers)))
+	if (atoi_error(argv[4], &(d->time_to_sleep)))
 		return (incorrect_arg_format(argv[4]));
-	if (argc == 6 && atoi_error(argv[5], &(d->number_of_philosophers)))
+	if (argc == 6 && atoi_error(argv[5], \
+	&(d->number_of_times_each_philosopher_must_eat)))
 		return (incorrect_arg_format(argv[5]));
+	if (d->number_of_philosophers < 0 || d->time_to_die < 0 || \
+	d->time_to_eat < 0 || d->time_to_sleep < 0 || \
+	(d->number_of_times_each_philosopher_must_eat < 0 && argc == 6))
+		return(invalid_arg());
 	return (0);
 }
