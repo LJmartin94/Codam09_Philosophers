@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/06/15 18:37:55 by lindsay       ########   odam.nl         */
+/*   Updated: 2021/06/28 17:53:13 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 #include <stdio.h>
+#include <pthread.h>
 #include "utils.h"
 
 typedef struct s_data
@@ -23,6 +24,9 @@ typedef struct s_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	number_of_times_each_philosopher_must_eat;
+
+	pthread_mutex_t *id_mutex;
+	int this_thread;
 } t_data;
 
 int ft_error_checker(int argc, char **argv, t_data *d);
