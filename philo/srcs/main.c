@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/06/28 18:08:33 by limartin      ########   odam.nl         */
+/*   Updated: 2021/06/28 19:16:31 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,20 @@
 
 void *perform_work(void *data)
 {
-  int index = (*((t_data *)data)).this_thread;
-  int sleep_time = 1 + rand() % (*((t_data *)data)).number_of_philosophers;
-  printf("THREAD %d: Started.\n", index);
-  printf("THREAD %d: Will be sleeping for %d seconds.\n", index, sleep_time);
-  sleep(sleep_time);
-  printf("THREAD %d: Ended.\n", index);
-  return(data);
+	t_data *d;
+	
+	d = (t_data *)data;
+	pthread_mutex_lock(d->id_mutex);
+	d->this_thread++;
+	int index = (d->this_thread);
+	// int sleep_time = 1 + rand() % (d->number_of_philosophers);
+	printf("THREAD %d: Started.\n", index);
+	int sleep_time = 43 - d->this_thread;
+	pthread_mutex_unlock(d->id_mutex);
+	printf("THREAD %d: Will be sleeping for %d seconds.\n", index, sleep_time);
+	sleep(sleep_time);
+	printf("THREAD %d: Ended.\n", index);
+	return(data);
 }
 // copied code END
 
@@ -53,11 +60,12 @@ int main(int argc, char **argv)
 	}
 	// write (1, "Bussin'\n", 8);
 
+	d.this_thread = 0;
+
 	//create all threads one by one
 	for (i = 0; i < d.number_of_philosophers; i++)
 	{
-		printf("IN MAIN: Creating thread %d.\n", i);
-		d.this_thread = i + 1;
+		printf("IN MAIN: Creating thread %d.\n", i + 1);
 		result_code = pthread_create(&threads[i], NULL, perform_work, &d);
 		// assert(!result_code);
   	}
@@ -69,7 +77,7 @@ int main(int argc, char **argv)
 	{
 		result_code = pthread_join(threads[i], NULL);
 		// assert(!result_code);
-		printf("IN MAIN: Thread %d has ended.\n", i);
+		printf("IN MAIN: Thread %d has ended.\n", i + 1);
 	}
 
 	if (pthread_mutex_destroy(d.id_mutex))
