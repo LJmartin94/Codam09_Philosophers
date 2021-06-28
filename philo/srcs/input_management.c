@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/06/16 15:49:59 by lindsay       ########   odam.nl         */
+/*   Updated: 2021/06/28 15:38:52 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int incorrect_arg_format(char *arg)
 static int incorrect_num_of_args(void)
 {
 	printf("Error: Incorrect number of arguments specified.\n\
-You must supply 4 5 arguments, namely:\n \
+You must supply 4-5 arguments, namely:\n \
 	1) number_of_philosophers\n \
 	2) time_to_die\n \
 	3) time_to_eat\n \
