@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/06/28 18:15:49 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/20 17:39:10 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,16 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	number_of_times_each_philosopher_must_eat;
 
-	pthread_mutex_t *id_mutex;
-	int this_thread;
+	pthread_mutex_t *game_state;
+	// pthread_mutex_t *action_mutex;
+	// int this_thread;
 } t_data;
+
+typedef struct s_philo_thread_args
+{
+	int 	thread_id;
+	t_data	*d;
+} t_philo_thread_args;
 
 int ft_error_checker(int argc, char **argv, t_data *d);
 
