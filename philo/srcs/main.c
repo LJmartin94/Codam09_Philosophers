@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/20 18:04:40 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/21 17:16:10 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 	t_data d;
 	pthread_t *philosophers; // array of 'philosopher' threads
 	t_philo_thread_args *args; // array of args passed to philosopher threads
-	pthread_mutex_t modify_data; // mutex reuired to change any data in the data struct d
+	pthread_mutex_t modify_data; // mutex required to change any data in the data struct d
 	int this_thread;
 	
 	if (ft_error_checker(argc, argv, &d)) //sanitise input
@@ -79,7 +79,6 @@ int main(int argc, char **argv)
 	}
 
 	this_thread = 0;
-
 	while (this_thread < d.number_of_philosophers)
 	{
 		(args[this_thread]).thread_id = this_thread;
@@ -89,54 +88,17 @@ int main(int argc, char **argv)
 		usleep(100);
 		this_thread++;
 	}
-
 	printf("IN MAIN: All threads are created.\n");
-	
-	// // copied code START
-	// pthread_t threads[d.number_of_philosophers];
-	// // int thread_args[d.number_of_philosophers];
-	// int i;
-	// int result_code;
-	// pthread_mutex_t philo_mutex;
 
-	// d.id_mutex = &philo_mutex;
+	if (pthread_mutex_destroy(&modify_data))
+	{
+		perror("errno on mutex destroy: ");
+		return(errno); // NEED PROPER ERROR MESSAGE HERE
+	}
 
-	// if (pthread_mutex_init(d.id_mutex, NULL))
-	// {
-	// 	perror("errno on mutex init: ");
-	// 	return(errno); // NEED PROPER ERROR MESSAGE HERE
-	// }
-	// // write (1, "Bussin'\n", 8);
-
-	// d.this_thread = 0;
-
-	// //create all threads one by one
-	// for (i = 0; i < d.number_of_philosophers; i++)
-	// {
-	// 	printf("IN MAIN: Creating thread %d.\n", i + 1);
-	// 	result_code = pthread_create(&threads[i], NULL, perform_work, &d);
-	// 	// assert(!result_code);
-  	// }
-
-  	// printf("IN MAIN: All threads are created.\n");
-
-	// //wait for each thread to complete
-	// for (i = 0; i < d.number_of_philosophers; i++) 
-	// {
-	// 	result_code = pthread_join(threads[i], NULL);
-	// 	// assert(!result_code);
-	// 	printf("IN MAIN: Thread %d has ended.\n", i + 1);
-	// }
-
-	// if (pthread_mutex_destroy(d.id_mutex))
-	// {
-	// 	perror("errno on mutex destroy: ");
-	// 	return(errno); // NEED PROPER ERROR MESSAGE HERE
-	// }
-
-	// printf("MAIN program has ended.\n");
-	// // copied code END
-	
-	return 0;
+	if(printf("MAIN program has ended.\n"))
+		return 0;
+	else
+		return 0;
 }
 
