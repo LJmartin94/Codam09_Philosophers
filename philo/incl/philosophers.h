@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/20 17:39:10 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/21 17:44:16 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 	int	number_of_times_each_philosopher_must_eat;
 
 	pthread_mutex_t *game_state;
+	pthread_mutex_t *print_status;
 	// pthread_mutex_t *action_mutex;
 	// int this_thread;
 } t_data;

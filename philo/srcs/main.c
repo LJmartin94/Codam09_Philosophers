@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/21 17:16:10 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/21 17:54:11 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int main(int argc, char **argv)
 	pthread_mutex_t modify_data; // mutex required to change any data in the data struct d
 	int this_thread;
 	
+	ft_data_null(&d);
 	if (ft_error_checker(argc, argv, &d)) //sanitise input
 		return (1);
 	
