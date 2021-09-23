@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/21 17:54:11 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/23 18:26:05 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,16 @@ void *ft_philosophise(void *args)
 int main(int argc, char **argv)
 {
 	t_data d;
-	pthread_t *philosophers; // array of 'philosopher' threads
-	t_philo_thread_args *args; // array of args passed to philosopher threads
 	pthread_mutex_t modify_data; // mutex required to change any data in the data struct d
 	int this_thread;
 	
 	ft_data_null(&d);
 	if (ft_error_checker(argc, argv, &d)) //sanitise input
 		return (1);
+	ft_malloc_all(&d);
+	ft_create_all_mutexes(&d);
 	
-	philosophers = (pthread_t *)malloc(sizeof(pthread_t) * d.number_of_philosophers); //malloc philo array
-	args = (t_philo_thread_args *)malloc(sizeof (t_philo_thread_args) * d.number_of_philosophers); //malloc philo args
+
 	d.game_state = &modify_data; //save location of mutex for modifying data struct to data struct
 	
 	if (pthread_mutex_init(d.game_state, NULL))
