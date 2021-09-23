@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/23 18:34:39 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/23 19:44:35 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include <stdio.h>
 #include <pthread.h>
 #include "utils.h"
+
+typedef struct s_philo_thread_args
+{
+	int 	thread_id;
+	struct s_data	*d;
+} t_philo_thread_args;
 
 typedef struct s_data
 {
@@ -35,12 +41,6 @@ typedef struct s_data
 	pthread_t *philosophers; // array of 'philosopher' threads
 	t_philo_thread_args *args; // array of args passed to philosopher threads
 } t_data;
-
-typedef struct s_philo_thread_args
-{
-	int 	thread_id;
-	t_data	*d;
-} t_philo_thread_args;
 
 int ft_error_checker(int argc, char **argv, t_data *d);
 int ft_data_null(t_data *d);
