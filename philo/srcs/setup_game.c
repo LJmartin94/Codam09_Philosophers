@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/09/28 18:15:37 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/28 18:59:32 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,23 @@ int ft_free_all(t_data *d)
 
 int ft_create_all_mutexes(t_data *d)
 {
-    (void) d;
+    // pthread_mutex_t modify_data; // mutex required to change any data in the data struct d
+    
+    // d->game_state = &modify_data; //save location of mutex for modifying data struct to data struct
+	if (pthread_mutex_init(&(d->game_state), NULL))
+	{
+		perror("errno on mutex init: ");
+		return(errno); // NEED PROPER ERROR MESSAGE HERE
+	}
     return (0);
 }
 
 int ft_destroy_all_mutexes(t_data *d)
 {
-    (void) d;
+    if (pthread_mutex_destroy(&(d->game_state)))
+	{
+		perror("errno on mutex destroy: ");
+		return(errno); // NEED PROPER ERROR MESSAGE HERE
+	}
     return (0);
 }

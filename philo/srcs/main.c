@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/28 18:36:54 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/28 19:03:22 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void *ft_philosophise(void *args)
 int main(int argc, char **argv)
 {
 	t_data d;
-	pthread_mutex_t modify_data; // mutex required to change any data in the data struct d
 	int this_thread;
 	
 	ft_data_null(&d);
@@ -69,15 +68,6 @@ int main(int argc, char **argv)
 	ft_malloc_all(&d);
 	ft_create_all_mutexes(&d);
 	
-
-	d.game_state = &modify_data; //save location of mutex for modifying data struct to data struct
-	
-	if (pthread_mutex_init(d.game_state, NULL))
-	{
-		perror("errno on mutex init: ");
-		return(errno); // NEED PROPER ERROR MESSAGE HERE
-	}
-
 	this_thread = 0;
 	while (this_thread < d.number_of_philosophers)
 	{
@@ -89,13 +79,9 @@ int main(int argc, char **argv)
 		this_thread++;
 	}
 	printf("IN MAIN: All threads are created.\n");
-
-	if (pthread_mutex_destroy(&modify_data))
-	{
-		perror("errno on mutex destroy: ");
-		return(errno); // NEED PROPER ERROR MESSAGE HERE
-	}
-
+	
+	ft_destroy_all_mutexes(&d);
+	
 	if(printf("MAIN program has ended.\n"))
 		return 0;
 	else
