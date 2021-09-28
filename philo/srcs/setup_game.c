@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/09/23 18:35:17 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/28 18:15:37 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ int ft_malloc_all(t_data *d)
 
 int ft_free_all(t_data *d)
 {
-
+    (void) d;
     return(0);
 }
 
 int ft_create_all_mutexes(t_data *d)
 {
-
+    (void) d;
     return (0);
 }
 
 int ft_destroy_all_mutexes(t_data *d)
 {
-
+    (void) d;
     return (0);
 }
