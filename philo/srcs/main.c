@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/23 19:48:43 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/28 18:14:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int main(int argc, char **argv)
 	this_thread = 0;
 	while (this_thread < d.number_of_philosophers)
 	{
-		(args[this_thread]).thread_id = this_thread;
-		(args[this_thread]).d = &d;
+		((d.args)[this_thread]).thread_id = this_thread;
+		((d.args)[this_thread]).d = &d;
 		printf("IN MAIN: Creating thread %d.\n", this_thread);
-		pthread_create(&philosophers[this_thread], NULL, ft_philosophise, &(args[this_thread]));
+		pthread_create(&(d.philosophers[this_thread]), NULL, ft_philosophise, &((d.args)[this_thread]));
 		usleep(100);
 		this_thread++;
 	}
