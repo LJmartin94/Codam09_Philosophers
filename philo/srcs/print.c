@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/09/29 16:53:32 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 17:25:39 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int ft_print_status(t_data *d, t_print_reason reason, int philo_id)
 {
 	int 	ms;
 	
+	pthread_mutex_lock(&(d->print_status));
 	ms = ft_get_ms(d);
 	if (reason == _fork)
 		printf("%d Philosopher %d has taken a fork\n", ms, philo_id);
@@ -27,5 +28,6 @@ int ft_print_status(t_data *d, t_print_reason reason, int philo_id)
 		printf("%d Philosopher %d is thinking\n", ms, philo_id);
 	else if (reason == _ded)
 		printf("%d Philosopher %d died\n", ms, philo_id);
+	pthread_mutex_unlock(&(d->print_status));
 	return (0);
 }

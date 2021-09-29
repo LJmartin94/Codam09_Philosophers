@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/09/29 14:42:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 17:30:49 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_data_null(t_data *d)
 	d->print_status_init = 0;
 	d->philosophers = NULL;
 	d->args = NULL;
+	d->terminate = 0;
 	return (0);
 }
 
@@ -54,15 +55,33 @@ int	ft_create_all_mutexes(t_data *d)
 	}
 	else
 		d->game_state_init = 1;
+	if (pthread_mutex_init(&(d->print_status), NULL))
+	{
+		perror("errno on mutex init: ");
+		return (errno); // NEED PROPER ERROR MESSAGE HERE
+	}
+	else
+		d->print_status_init = 1;
 	return (0);
 }
 
 int	ft_destroy_all_mutexes(t_data *d)
 {
-	if (pthread_mutex_destroy(&(d->game_state)))
+	if (d->game_state_init)
 	{
-		perror("errno on mutex destroy: ");
-		return (errno); // NEED PROPER ERROR MESSAGE HERE
+		if (pthread_mutex_destroy(&(d->game_state)))
+		{
+			perror("errno on mutex destroy: ");
+			return (errno); // NEED PROPER ERROR MESSAGE HERE
+		}
+	}
+	if (d->print_status_init)
+	{
+		if (pthread_mutex_destroy(&(d->print_status)))
+		{
+			perror("errno on mutex destroy: ");
+			return (errno); // NEED PROPER ERROR MESSAGE HERE
+		}
 	}
 	return (0);
 }
