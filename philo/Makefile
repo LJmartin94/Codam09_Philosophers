@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/09/23 18:36:11 by limartin      ########   odam.nl          #
+#    Updated: 2021/09/29 15:24:09 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,9 @@ HEADER_FILES = $(INCL_PATH)
 #Source files mandatory part
 SRC = $(SRC_PATH)main.c \
 	$(SRC_PATH)input_management.c \
-	$(SRC_PATH)print.c \
 	$(SRC_PATH)setup_game.c \
+	$(SRC_PATH)time.c \
+	$(SRC_PATH)print.c \
 	$(UTILS_PATH)conversions.c \
 	$(UTILS_PATH)e_malloc.c \
 	$(UTILS_PATH)strcmp.c \

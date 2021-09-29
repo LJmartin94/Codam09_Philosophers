@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 15:02:29 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 15:53:12 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 # include "utils.h"
 
 typedef struct s_philo_thread_args
@@ -33,9 +34,10 @@ typedef struct s_data
 	int					allocation_failure;
 	pthread_t			*philosophers;
 	t_philo_thread_args	*args;
+	struct timeval		start_time;
 	pthread_mutex_t		game_state;
-	int					game_state_init;
 	pthread_mutex_t		print_status;
+	int					game_state_init;
 	int					print_status_init;
 }	t_data;
 
@@ -45,5 +47,7 @@ int	ft_malloc_all(t_data *d);
 int	ft_free_all(t_data *d);
 int	ft_create_all_mutexes(t_data *d);
 int	ft_destroy_all_mutexes(t_data *d);
+int ft_start_clock(t_data *d);
+int ft_get_ms(t_data *d);
 
 #endif
