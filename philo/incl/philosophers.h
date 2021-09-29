@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 16:47:31 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 18:28:26 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # include <sys/time.h>
 # include "utils.h"
 
-typedef enum e_print_reason
+typedef enum e_state
 {
 	_fork,
 	_eat,
 	_sleep,
 	_think,
 	_ded
-}	t_print_reason;
+}	t_state;
 
 typedef struct s_philo_thread_args
 {
@@ -44,6 +44,7 @@ typedef struct s_data
 	pthread_t			*philosophers;
 	t_philo_thread_args	*args;
 	struct timeval		start_time;
+	int					terminate;
 	pthread_mutex_t		game_state;
 	pthread_mutex_t		print_status;
 	int					game_state_init;
@@ -58,6 +59,7 @@ int	ft_create_all_mutexes(t_data *d);
 int	ft_destroy_all_mutexes(t_data *d);
 int ft_start_clock(t_data *d);
 int ft_get_ms(t_data *d);
-int ft_print_status(t_data *d, t_print_reason reason, int philo_id);
+int ft_print_status(t_data *d, t_state reason, int philo_id);
+int	ft_kill_all_threads(t_data *d);
 
 #endif
