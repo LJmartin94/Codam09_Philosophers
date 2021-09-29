@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 15:53:12 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 16:47:31 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include "utils.h"
+
+typedef enum e_print_reason
+{
+	_fork,
+	_eat,
+	_sleep,
+	_think,
+	_ded
+}	t_print_reason;
 
 typedef struct s_philo_thread_args
 {
@@ -49,5 +58,6 @@ int	ft_create_all_mutexes(t_data *d);
 int	ft_destroy_all_mutexes(t_data *d);
 int ft_start_clock(t_data *d);
 int ft_get_ms(t_data *d);
+int ft_print_status(t_data *d, t_print_reason reason, int philo_id);
 
 #endif

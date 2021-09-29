@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 15:56:11 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 16:47:02 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ void	*ft_philosophise(void *args)
 	t_data	*d;
 	int		thread_id;
 	int		philosopher;
-	int 	ms;
-
+	
 	d = ((t_philo_thread_args *)args)->d;
 	thread_id = ((t_philo_thread_args *)args)->thread_id;
 	philosopher = thread_id + 1;
 	// FREE ARG MALLOC HERE, SET TO NULL
 	while (1)
 	{
-		ms = ft_get_ms(d);
-		printf("%d Philosopher %d is idling\n", ms, philosopher);
+		ft_print_status(d, _think, philosopher);
 		usleep(100);
 	}
 	return (args);
