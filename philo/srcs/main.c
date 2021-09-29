@@ -6,51 +6,61 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 16:47:02 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 18:29:32 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-// // copied code START
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <assert.h>
-// #include <unistd.h>
-// #include <errno.h>
-
-// void *perform_work(void *data)
-// {
-// 	t_data *d;
-
-// 	d = (t_data *)data;
-// 	pthread_mutex_lock(d->id_mutex);
-// 	d->this_thread++;
-// 	int index = (d->this_thread);
-// 	// int sleep_time = 1 + rand() % (d->number_of_philosophers);
-// 	printf("THREAD %d: Started.\n", index);
-// 	int sleep_time = 43 - d->this_thread;
-// 	pthread_mutex_unlock(d->id_mutex);
-// 	printf("THREAD %d: Will be sleeping for %d seconds.\n", index, sleep_time);
-// 	sleep(sleep_time);
-// 	printf("THREAD %d: Ended.\n", index);
-// 	return(data);
-// }
-// // copied code END
 
 void	*ft_philosophise(void *args)
 {
 	t_data	*d;
 	int		thread_id;
 	int		philosopher;
+	t_state	state;
+	int		last_ate;
+	int		now;
 	
 	d = ((t_philo_thread_args *)args)->d;
 	thread_id = ((t_philo_thread_args *)args)->thread_id;
 	philosopher = thread_id + 1;
 	// FREE ARG MALLOC HERE, SET TO NULL
-	while (1)
+	state = _think;
+	last_ate = 0;
+	while (1 && !d->terminate)
 	{
-		ft_print_status(d, _think, philosopher);
+		now = ft_get_ms(d);
+		if (now >= (last_ate + d->time_to_die))
+		{
+			state = _ded;
+			ft_print_status(d, state, philosopher);
+			d->terminate = 1;
+		}
+		else if (now >= (last_ate + d->time_to_eat) && state == _eat)
+		{
+			state = _sleep;
+			ft_print_status(d, state, philosopher);
+			//DROP FORKS
+		}
+		else if (now >= (last_ate + d->time_to_eat + d->time_to_sleep) && state == _sleep)
+		{
+			state = _think;
+			ft_print_status(d, state, philosopher);
+		}
+		else if (state == _think)
+		{
+			state = _fork;
+			ft_print_status(d, state, philosopher);
+		}
+		else if (state == _fork)
+		{
+			//grab second fork, or drop first
+			ft_print_status(d, state, philosopher);
+			state = _eat;
+			ft_print_status(d, state, philosopher);
+			last_ate = now;
+		}
+
 		usleep(100);
 	}
 	return (args);
@@ -79,6 +89,11 @@ int	main(int argc, char **argv)
 		this_thread++;
 	}
 	printf("IN MAIN: All threads are created.\n");
+	while(!d.terminate)
+	{
+		usleep(100);
+	}
+	ft_kill_all_threads(&d);
 	ft_destroy_all_mutexes(&d);
 	if (printf("MAIN program has ended.\n"))
 		return (0);
