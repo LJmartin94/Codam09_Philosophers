@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/09/28 18:59:32 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 14:08:36 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int ft_data_null(t_data *d)
 
     d->allocation_failure = 0;
 
-	d->game_state = NULL;
-	d->print_status = NULL;
+	d->game_state_init = 0;
+	d->print_status_init = 0;
 
     d->philosophers = NULL;
     d->args = NULL;

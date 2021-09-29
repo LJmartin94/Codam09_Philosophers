@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/28 18:58:03 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/29 14:06:36 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ typedef struct s_data
 	int allocation_failure;
 
 	pthread_mutex_t game_state;
+	int game_state_init;
 	pthread_mutex_t print_status;
+	int print_status_init;
 	// pthread_mutex_t *action_mutex;
 	// int this_thread;
 
