@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 17:18:42 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/06/15 18:23:29 by lindsay       ########   odam.nl         */
+/*   Updated: 2021/09/29 14:31:12 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	size_t	ft_intlen(long int num)
 ** Returns a malloc'd string based on the integer passed.
 */
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long int	num;
 	size_t		len;
@@ -68,7 +68,7 @@ char			*ft_itoa(int n)
 ** Behaves like standard atoi function, used in 'atoi_error' wrapper function.
 */
 
-static int		ft_atoi(const char *str)
+static int	ft_atoi(const char *str)
 {
 	int			i;
 	long int	sign;
@@ -99,11 +99,11 @@ static int		ft_atoi(const char *str)
 ** Arguments with leading zeros or plusses are not handled.
 */
 
-int atoi_error(const char *input, int *ptr)
+int	atoi_error(const char *input, int *ptr)
 {
 	int		test;
 	char	*expected;
-	
+
 	test = ft_atoi(input);
 	expected = ft_itoa(test);
 	if (are_strs_eq(expected, input))
