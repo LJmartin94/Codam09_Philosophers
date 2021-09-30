@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 18:29:32 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 18:14:02 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ void	*ft_philosophise(void *args)
 		now = ft_get_ms(d);
 		if (now >= (last_ate + d->time_to_die))
 		{
+			pthread_mutex_lock(&(d->game_state));
 			state = _ded;
-			ft_print_status(d, state, philosopher);
+			if (!d->terminate)
+				ft_print_status(d, state, philosopher);
 			d->terminate = 1;
+			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (now >= (last_ate + d->time_to_eat) && state == _eat)
 		{
