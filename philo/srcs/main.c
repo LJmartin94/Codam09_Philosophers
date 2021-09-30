@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 18:56:57 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 20:08:31 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,44 +30,34 @@ void	*ft_philosophise(void *args)
 		now = ft_get_ms(d);
 		if (now >= (last_ate + d->time_to_die))
 		{
-			pthread_mutex_lock(&(d->game_state));
 			state = _ded;
 			if (!d->terminate)
 				ft_print_status(d, state, philosopher);
 			d->terminate = 1;
-			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (now >= (last_ate + d->time_to_eat) && state == _eat)
 		{
-			pthread_mutex_lock(&(d->game_state));
 			state = _sleep;
 			ft_print_status(d, state, philosopher);
 			//DROP FORKS
-			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (now >= (last_ate + d->time_to_eat + d->time_to_sleep) && state == _sleep)
 		{
-			pthread_mutex_lock(&(d->game_state));
 			state = _think;
 			ft_print_status(d, state, philosopher);
-			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (state == _think)
 		{
-			pthread_mutex_lock(&(d->game_state));
 			state = _fork;
 			ft_print_status(d, state, philosopher);
-			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (state == _fork)
 		{
-			pthread_mutex_lock(&(d->game_state));
 			//grab second fork, or drop first
 			ft_print_status(d, state, philosopher);
 			state = _eat;
 			ft_print_status(d, state, philosopher);
 			last_ate = now;
-			pthread_mutex_unlock(&(d->game_state));
 		}
 		usleep(100);
 	}
