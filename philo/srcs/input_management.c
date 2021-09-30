@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 14:51:16 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 18:39:28 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static int	invalid_arg(void)
 {
 	printf("Error: Invalid argument passed. \n\
-All arguments should be greater than or equal to zero\n");
+All arguments should be greater than or equal to zero, \
+and there should be at least one philosopher.\n");
 	return (1);
 }
 
@@ -55,7 +56,7 @@ int	ft_error_checker(int argc, char **argv, t_data *d)
 	if (argc == 6 && atoi_error(argv[5], \
 	&(d->number_of_times_each_philosopher_must_eat)))
 		return (incorrect_arg_format(argv[5]));
-	if (d->number_of_philosophers < 0 || d->time_to_die < 0 || \
+	if (d->number_of_philosophers <= 0 || d->time_to_die < 0 || \
 	d->time_to_eat < 0 || d->time_to_sleep < 0 || \
 	(d->number_of_times_each_philosopher_must_eat < 0 && argc == 6))
 		return (invalid_arg());

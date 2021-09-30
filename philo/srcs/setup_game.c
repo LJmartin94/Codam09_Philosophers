@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/09/29 17:30:49 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 18:24:17 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_malloc_all(t_data *d)
 
 int	ft_free_all(t_data *d)
 {
+	//TO DO: Free everything, and also tidy up malloc fails.
 	(void) d;
 	return (0);
 }
