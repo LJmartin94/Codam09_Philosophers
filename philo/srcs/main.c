@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 20:08:31 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 20:16:34 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv)
 		return (1);
 	ft_malloc_all(&d);
 	ft_create_all_mutexes(&d);
-	ft_start_clock(&d);
+	ft_start_clock(&d); //only do this after all threads are created. Start running threads once clock is started.
 	this_thread = 0;
 	while (this_thread < d.number_of_philosophers)
 	{
