@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 18:38:00 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 18:56:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,35 @@ void	*ft_philosophise(void *args)
 		}
 		else if (now >= (last_ate + d->time_to_eat) && state == _eat)
 		{
+			pthread_mutex_lock(&(d->game_state));
 			state = _sleep;
 			ft_print_status(d, state, philosopher);
 			//DROP FORKS
+			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (now >= (last_ate + d->time_to_eat + d->time_to_sleep) && state == _sleep)
 		{
+			pthread_mutex_lock(&(d->game_state));
 			state = _think;
 			ft_print_status(d, state, philosopher);
+			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (state == _think)
 		{
+			pthread_mutex_lock(&(d->game_state));
 			state = _fork;
 			ft_print_status(d, state, philosopher);
+			pthread_mutex_unlock(&(d->game_state));
 		}
 		else if (state == _fork)
 		{
+			pthread_mutex_lock(&(d->game_state));
 			//grab second fork, or drop first
 			ft_print_status(d, state, philosopher);
 			state = _eat;
 			ft_print_status(d, state, philosopher);
 			last_ate = now;
+			pthread_mutex_unlock(&(d->game_state));
 		}
 		usleep(100);
 	}
@@ -85,17 +93,16 @@ int	main(int argc, char **argv)
 		printf("IN MAIN: Creating thread %d.\n", this_thread);
 		pthread_create(&(d.philosophers[this_thread]), NULL, \
 		ft_philosophise, &((d.args)[this_thread]));
-		usleep(100);
 		this_thread++;
 	}
-	printf("IN MAIN: All threads are created.\n");
+	printf("IN MAIN: All threads are created at %d.\n", ft_get_ms(&d));
 	while(!d.terminate)
 	{
 		usleep(100);
 	}
 	ft_kill_all_threads(&d);
 	ft_destroy_all_mutexes(&d);
-	if (printf("MAIN program has ended.\n"))
+	if (printf("MAIN program has ended at %d.\n", ft_get_ms(&d)))
 		return (0);
 	else
 		return (0);
