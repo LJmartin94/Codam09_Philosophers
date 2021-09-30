@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/29 18:28:26 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 20:58:28 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include "utils.h"
+
+# define COLOUR_RED "\033[0;31m"
+# define COLOUR_GREEN "\033[0;32m"
+# define COLOUR_BLUE "\033[0;34m"
+# define COLOUR_YELLOW "\033[0;33m"
+# define COLOUR_CYAN "\033[0;36m"
+# define COLOUR_DEFAULT "\033[0m"
 
 typedef enum e_state
 {
