@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 18:14:02 by limartin      ########   odam.nl         */
+/*   Updated: 2021/09/30 18:38:00 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	*ft_philosophise(void *args)
 {
 	t_data	*d;
-	int		thread_id;
 	int		philosopher;
 	t_state	state;
 	int		last_ate;
 	int		now;
 	
 	d = ((t_philo_thread_args *)args)->d;
-	thread_id = ((t_philo_thread_args *)args)->thread_id;
-	philosopher = thread_id + 1;
+	philosopher = ((t_philo_thread_args *)args)->thread_id + 1;
 	// FREE ARG MALLOC HERE, SET TO NULL
 	state = _think;
 	last_ate = 0;
@@ -63,7 +61,6 @@ void	*ft_philosophise(void *args)
 			ft_print_status(d, state, philosopher);
 			last_ate = now;
 		}
-
 		usleep(100);
 	}
 	return (args);
@@ -75,7 +72,7 @@ int	main(int argc, char **argv)
 	int		this_thread;
 
 	ft_data_null(&d);
-	if (ft_error_checker(argc, argv, &d)) //sanitise input
+	if (ft_error_checker(argc, argv, &d))
 		return (1);
 	ft_malloc_all(&d);
 	ft_create_all_mutexes(&d);
