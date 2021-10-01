@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 16:45:50 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 17:12:16 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*ft_philosophise(void *args)
 	
 	d = ((t_philo_thread_args *)args)->d;
 	philosopher = ((t_philo_thread_args *)args)->thread_id + 1;
-	// FREE ARG MALLOC HERE, SET TO NULL
 	state = _think;
 	last_ate = 0;
 	while (1 && !d->terminate)
@@ -73,8 +72,9 @@ int	main(int argc, char **argv)
 	if (ft_error_checker(argc, argv, &d))
 		return (1);
 	if (ft_malloc_all(&d))
-		return(ft_malloc_failure(&d));
-	ft_create_all_mutexes(&d);
+		return (ft_malloc_failure(&d));
+	if (ft_create_all_mutexes(&d))
+		return (1);
 	ft_start_clock(&d); //only do this after all threads are created. Start running threads once clock is started.
 	this_thread = 0;
 	while (this_thread < d.number_of_philosophers)

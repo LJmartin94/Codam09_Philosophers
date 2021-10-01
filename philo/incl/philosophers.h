@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 16:47:02 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 19:31:36 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,8 @@ int ft_start_clock(t_data *d);
 int ft_get_ms(t_data *d);
 int ft_print_status(t_data *d, t_state reason, int philo_id);
 int	ft_kill_all_threads(t_data *d);
+int	ft_malloc_failure(t_data *d);
+int	ft_mutex_init_failure(t_data *d);
+int	ft_mutex_destroy_failure(t_data *d);
 
 #endif

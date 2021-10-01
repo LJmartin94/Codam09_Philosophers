@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 16:49:24 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 19:37:33 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_error_checker(int argc, char **argv, t_data *d)
 	return (0);
 }
 
-ft_malloc_failure(t_data *d)
+int	ft_malloc_failure(t_data *d)
 {
 	ft_free_all(d);
 	printf("Memory allocation error: \n\
@@ -72,7 +72,19 @@ ft_malloc_failure(t_data *d)
 	return (1);
 }
 
-ft_mutex_failure(t_data *d)
+int	ft_mutex_init_failure(t_data *d)
 {
+	printf("A mutex failed to initialise correctly. Program will exit.\n");
+	ft_destroy_all_mutexes(d);
+	ft_free_all(d);
+	return(1);
+}
 
+int	ft_mutex_destroy_failure(t_data *d)
+{
+	printf("A mutex failed to be destroyed correctly. \
+	Attempting to destroy other mutexes, then program will exit.\n");
+	if(!ft_destroy_all_mutexes(d))
+		ft_free_all(d);
+	return(1);
 }
