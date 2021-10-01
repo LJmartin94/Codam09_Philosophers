@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 19:32:26 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 19:41:39 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_create_all_mutexes(t_data *d)
 	if (pthread_mutex_init(&(d->print_status), NULL))
 		return(ft_mutex_init_failure(d));
 	else
-		d->game_state_init = 1;
+		d->print_state_init = 1;
 	while (d->forks_initialised < d->number_of_philosophers)
 	{
 		if (pthread_mutex_init(&(d->forks[d->forks_initialised]), NULL))
