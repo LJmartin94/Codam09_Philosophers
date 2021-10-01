@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 15:56:08 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 16:31:04 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,15 @@ int	ft_destroy_all_mutexes(t_data *d)
 	if (d->print_status_init)
 	{
 		if (pthread_mutex_destroy(&(d->print_status)))
+		{
+			perror("errno on mutex destroy: ");
+			return (errno); // NEED PROPER ERROR MESSAGE HERE
+		}
+	}
+	while (d->forks_initialised)
+	{
+		d->forks_initialised--;
+		if (pthread_mutex_destroy(&(d->forks[d->forks_initialised])))
 		{
 			perror("errno on mutex destroy: ");
 			return (errno); // NEED PROPER ERROR MESSAGE HERE
