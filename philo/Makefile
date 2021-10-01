@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/09/29 17:44:58 by limartin      ########   odam.nl          #
+#    Updated: 2021/10/01 19:51:29 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ HEADER_FILES = $(INCL_PATH)
 SRC = $(SRC_PATH)main.c \
 	$(SRC_PATH)input_management.c \
 	$(SRC_PATH)setup_game.c \
+	$(SRC_PATH)malloc_handling.c \
+	$(SRC_PATH)mutex_handling.c \
 	$(SRC_PATH)time.c \
 	$(SRC_PATH)print.c \
 	$(SRC_PATH)killthreads.c \
