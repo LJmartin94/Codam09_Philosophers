@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 16:31:04 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 16:44:47 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_data_null(t_data *d)
 	d->time_to_eat = -1;
 	d->time_to_sleep = -1;
 	d->number_of_times_each_philosopher_must_eat = -1;
-	d->allocation_failure = 0;
 	d->game_state_init = 0;
 	d->print_status_init = 0;
 	d->forks_initialised = 0;
@@ -40,14 +39,21 @@ int	ft_malloc_all(t_data *d)
 	d->forks = (pthread_mutex_t *) \
 	malloc(sizeof(pthread_mutex_t) * d->number_of_philosophers);
 	if (!d->philosophers || !d->args || !d->forks)
-		d->allocation_failure = 1;
+		return (1);
 	return (0);
 }
 
 int	ft_free_all(t_data *d)
 {
-	//TO DO: Free everything, and also tidy up malloc fails.
-	(void) d;
+	if (d->philosophers)
+		free(d->philosophers)
+	d->philosophers = NULL;
+	if (d->args)
+		free(d->args)
+	d->args = NULL;
+	if (d->forks)
+		free(d->forks)
+	d->forks = NULL;
 	return (0);
 }
 

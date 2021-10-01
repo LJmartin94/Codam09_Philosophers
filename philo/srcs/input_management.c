@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 18:39:28 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 16:49:24 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ int	ft_error_checker(int argc, char **argv, t_data *d)
 	(d->number_of_times_each_philosopher_must_eat < 0 && argc == 6))
 		return (invalid_arg());
 	return (0);
+}
+
+ft_malloc_failure(t_data *d)
+{
+	ft_free_all(d);
+	printf("Memory allocation error: \n\
+	A malloc call failed to complete succesfully.\n\
+	Program will exit.\n");
+	return (1);
+}
+
+ft_mutex_failure(t_data *d)
+{
+
 }

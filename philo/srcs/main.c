@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 20:16:34 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 16:45:50 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	main(int argc, char **argv)
 	ft_data_null(&d);
 	if (ft_error_checker(argc, argv, &d))
 		return (1);
-	ft_malloc_all(&d);
+	if (ft_malloc_all(&d))
+		return(ft_malloc_failure(&d));
 	ft_create_all_mutexes(&d);
 	ft_start_clock(&d); //only do this after all threads are created. Start running threads once clock is started.
 	this_thread = 0;
@@ -92,6 +93,7 @@ int	main(int argc, char **argv)
 	}
 	ft_kill_all_threads(&d);
 	ft_destroy_all_mutexes(&d);
+	ft_free_all(&d);
 	if (printf("MAIN program has ended at %d.\n", ft_get_ms(&d)))
 		return (0);
 	else
