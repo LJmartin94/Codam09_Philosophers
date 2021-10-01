@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 17:12:16 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 20:21:59 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_philosophise(void *args)
 	t_state	state;
 	int		last_ate;
 	int		now;
-	
+
 	d = ((t_philo_thread_args *)args)->d;
 	philosopher = ((t_philo_thread_args *)args)->thread_id + 1;
 	state = _think;
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 		this_thread++;
 	}
 	printf("IN MAIN: All threads are created at %d.\n", ft_get_ms(&d));
-	while(!d.terminate)
+	while (!d.terminate)
 	{
 		usleep(100);
 	}

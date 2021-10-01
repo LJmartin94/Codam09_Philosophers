@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:46:44 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 19:59:27 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 20:20:31 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	ft_create_all_mutexes(t_data *d)
 {
 	if (pthread_mutex_init(&(d->game_state), NULL))
-		return(ft_mutex_init_failure(d));
+		return (ft_mutex_init_failure(d));
 	else
 		d->game_state_init = 1;
 	if (pthread_mutex_init(&(d->print_status), NULL))
-		return(ft_mutex_init_failure(d));
+		return (ft_mutex_init_failure(d));
 	else
 		d->print_status_init = 1;
 	while (d->forks_initialised < d->number_of_philosophers)
 	{
 		if (pthread_mutex_init(&(d->forks[d->forks_initialised]), NULL))
-			return(ft_mutex_init_failure(d));
+			return (ft_mutex_init_failure(d));
 		else
 			d->forks_initialised++;
 	}
@@ -58,16 +58,16 @@ int	ft_destroy_all_mutexes(t_data *d)
 int	ft_mutex_init_failure(t_data *d)
 {
 	printf("A mutex failed to initialise correctly. Program will exit.\n");
-	if(!ft_destroy_all_mutexes(d))
+	if (!ft_destroy_all_mutexes(d))
 		ft_free_all(d);
-	return(1);
+	return (1);
 }
 
 int	ft_mutex_destroy_failure(t_data *d)
 {
 	printf("A mutex failed to be destroyed correctly. \
 	Attempting to destroy other mutexes, then program will exit.\n");
-	if(!ft_destroy_all_mutexes(d))
+	if (!ft_destroy_all_mutexes(d))
 		ft_free_all(d);
-	return(1);
+	return (1);
 }

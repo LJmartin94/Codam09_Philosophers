@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 19:31:36 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 20:17:39 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # include <sys/time.h>
 # include "utils.h"
 
-# define COLOUR_RED "\033[0;31m"
-# define COLOUR_GREEN "\033[0;32m"
-# define COLOUR_BLUE "\033[0;34m"
-# define COLOUR_YELLOW "\033[0;33m"
-# define COLOUR_CYAN "\033[0;36m"
-# define COLOUR_DEFAULT "\033[0m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define BLUE "\033[0;34m"
+# define YLW "\033[0;33m"
+# define CYAN "\033[0;36m"
+# define DEF "\033[0m"
 
 typedef enum e_state
 {
@@ -65,9 +65,9 @@ int	ft_malloc_all(t_data *d);
 int	ft_free_all(t_data *d);
 int	ft_create_all_mutexes(t_data *d);
 int	ft_destroy_all_mutexes(t_data *d);
-int ft_start_clock(t_data *d);
-int ft_get_ms(t_data *d);
-int ft_print_status(t_data *d, t_state reason, int philo_id);
+int	ft_start_clock(t_data *d);
+int	ft_get_ms(t_data *d);
+int	ft_print_status(t_data *d, t_state reason, int philo_id);
 int	ft_kill_all_threads(t_data *d);
 int	ft_malloc_failure(t_data *d);
 int	ft_mutex_init_failure(t_data *d);
