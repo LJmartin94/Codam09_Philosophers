@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/09/30 20:58:28 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 15:39:03 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ typedef struct s_data
 	int					terminate;
 	pthread_mutex_t		game_state;
 	pthread_mutex_t		print_status;
+	pthread_mutex_t		*forks;
 	int					game_state_init;
 	int					print_status_init;
+	int					forks_initialised;
 }	t_data;
 
 int	ft_error_checker(int argc, char **argv, t_data *d);
