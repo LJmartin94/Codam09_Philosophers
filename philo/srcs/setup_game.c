@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 15:43:26 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 15:56:08 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_data_null(t_data *d)
 	d->allocation_failure = 0;
 	d->game_state_init = 0;
 	d->print_status_init = 0;
+	d->forks_initialised = 0;
 	d->philosophers = NULL;
 	d->args = NULL;
 	d->forks = NULL;
@@ -66,6 +67,15 @@ int	ft_create_all_mutexes(t_data *d)
 	}
 	else
 		d->print_status_init = 1;
+	while (d->forks_initialised < d->number_of_philosophers)
+	{
+		if (pthread_mutex_init(&(d->forks[d->forks_initialised]), NULL))
+		{
+			perror("errno on mutex init: ");
+			return (errno); // NEED PROPER ERROR MESSAGE HERE
+		}
+		d->forks_initialised++;
+	}
 	return (0);
 }
 
