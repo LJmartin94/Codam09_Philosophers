@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:46:44 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 19:52:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/01 19:59:27 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	ft_destroy_all_mutexes(t_data *d)
 int	ft_mutex_init_failure(t_data *d)
 {
 	printf("A mutex failed to initialise correctly. Program will exit.\n");
-	ft_destroy_all_mutexes(d);
-	ft_free_all(d);
+	if(!ft_destroy_all_mutexes(d))
+		ft_free_all(d);
 	return(1);
 }
 
