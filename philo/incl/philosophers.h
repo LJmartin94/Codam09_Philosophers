@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 20:17:39 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/04 23:55:19 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ int	ft_kill_all_threads(t_data *d);
 int	ft_malloc_failure(t_data *d);
 int	ft_mutex_init_failure(t_data *d);
 int	ft_mutex_destroy_failure(t_data *d);
+int ft_try_forks(t_data *d, int philo, int now);
+int ft_drop_forks(t_data *d, int philo);
 
 #endif
