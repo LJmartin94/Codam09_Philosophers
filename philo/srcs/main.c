@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/01 20:21:59 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/05 00:44:35 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_philosophise(void *args)
 	int		philosopher;
 	t_state	state;
 	int		last_ate;
-	int		now;
+	// int		now;
 
 	d = ((t_philo_thread_args *)args)->d;
 	philosopher = ((t_philo_thread_args *)args)->thread_id + 1;
@@ -26,37 +26,32 @@ void	*ft_philosophise(void *args)
 	last_ate = 0;
 	while (1 && !d->terminate)
 	{
-		now = ft_get_ms(d);
-		if (now >= (last_ate + d->time_to_die))
+		// now = ft_get_ms(d);
+		if (ft_get_ms(d) >= (last_ate + d->time_to_die))
 		{
 			state = _ded;
 			if (!d->terminate)
 				ft_print_status(d, state, philosopher);
 			d->terminate = 1;
 		}
-		else if (now >= (last_ate + d->time_to_eat) && state == _eat)
+		else if (ft_get_ms(d) >= (last_ate + d->time_to_eat) && state == _eat)
 		{
 			state = _sleep;
+			ft_drop_forks(d, philosopher);
 			ft_print_status(d, state, philosopher);
-			//DROP FORKS
 		}
-		else if (now >= (last_ate + d->time_to_eat + d->time_to_sleep) && state == _sleep)
+		else if (ft_get_ms(d) >= (last_ate + d->time_to_eat + d->time_to_sleep) && state == _sleep)
 		{
 			state = _think;
 			ft_print_status(d, state, philosopher);
 		}
 		else if (state == _think)
 		{
-			state = _fork;
-			ft_print_status(d, state, philosopher);
-		}
-		else if (state == _fork)
-		{
-			//grab second fork, or drop first
-			ft_print_status(d, state, philosopher);
-			state = _eat;
-			ft_print_status(d, state, philosopher);
-			last_ate = now;
+			if (ft_try_forks(d, philosopher, ft_get_ms(d)))
+			{
+				state = _eat;
+				last_ate = ft_get_ms(d);
+			}
 		}
 		usleep(100);
 	}

@@ -6,11 +6,11 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/04 22:52:13 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/05 00:41:47 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philosophers.h"
 
 /*
 ** If philosophers haven't eaten at all yet, 
@@ -38,7 +38,7 @@ int	ft_stagger(t_data *d, int philo, int now)
 	else
 		priority = 3;
 	if (now <= d->time_to_eat)
-		return (wait_time * (priority - 1))
+		return (wait_time * (priority - 1));
 	return (0);
 }
 
@@ -56,8 +56,26 @@ int ft_try_forks(t_data *d, int philo, int now)
 	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
 	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
 	if (now <= d->time_to_eat)
-		usleep(ft_stagger);
-	
-	
+		usleep(ft_stagger(d, philo, now));
+	pthread_mutex_lock(&(d->forks[first_fork]));
+	ft_print_status(d, _fork, philo);
+	pthread_mutex_lock(&(d->forks[second_fork]));
+	ft_print_status(d, _fork, philo);
+	ft_print_status(d, _eat, philo);
+	return (1);
+}
+
+int ft_drop_forks(t_data *d, int philo)
+{
+	int first_fork;
+	int second_fork;
+
+	if (d->number_of_philosophers == 1)
+		return (0);
+	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
+	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
+	pthread_mutex_unlock(&(d->forks[second_fork]));
+	pthread_mutex_unlock(&(d->forks[first_fork]));
+	return(1);
 }
 
