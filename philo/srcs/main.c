@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/05 00:44:35 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/05 01:18:04 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	*ft_philosophise(void *args)
 	}
 	return (args);
 }
+
+// THERE ARE TWO PROBLEMS WITH THE CODE RIGHT NOW THAT I AM AWARE OF: 
+// PHILOS EAT AFTER THEY SHOULD DIE - E.G. 3 2001 1000 1000, PHILO 2 EATS AT 0 & 3000 AND NOT IN BETWEEN.
+// PHILOS DIE, AND LOCK UP THE PROGRAM DUE TO UNRELEASED MUTEXES - E.G. 3 999 1000 1000.
 
 int	main(int argc, char **argv)
 {
