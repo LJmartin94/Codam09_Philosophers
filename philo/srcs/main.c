@@ -6,11 +6,19 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/05 01:18:04 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/05 15:15:07 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int check_ded(t_data	*d, int last_ate)
+{
+	if (ft_get_ms(d) >= (last_ate + d->time_to_die))
+		return (1);
+	else
+		return (0);
+}
 
 void	*ft_philosophise(void *args)
 {
