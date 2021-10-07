@@ -6,19 +6,11 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/07 14:28:49 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 15:25:11 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int check_ded(t_data	*d, int last_ate)
-{
-	if (ft_get_ms(d) >= (last_ate + d->time_to_die))
-		return (1);
-	else
-		return (0);
-}
 
 void	*ft_philosophise(void *args)
 {
@@ -29,9 +21,9 @@ void	*ft_philosophise(void *args)
 	d = ((t_philo_thread_args *)args)->d;
 	philo = ((t_philo_thread_args *)args)->thread_id + 1;
 	state = _think;
-	pthread_mutex_lock(&(d->mutex_last_ate));
+	// pthread_mutex_lock(&(d->mutex_last_ate));
 	d->last_ate[philo - 1] = 0;
-	pthread_mutex_unlock(&(d->mutex_last_ate));
+	// pthread_mutex_unlock(&(d->mutex_last_ate));
 	while (!d->clock_started)
 		usleep(100);
 	while (1 && !d->terminate)
@@ -61,12 +53,14 @@ void	*ft_philosophise(void *args)
 			if (ft_try_forks(d, philo, ft_get_ms(d)))
 			{
 				state = _eat;
-				pthread_mutex_lock(&(d->mutex_last_ate));
+				// pthread_mutex_lock(&(d->mutex_last_ate));
 				d->last_ate[philo - 1] = ft_get_ms(d);
-				pthread_mutex_unlock(&(d->mutex_last_ate));
+				// pthread_mutex_unlock(&(d->mutex_last_ate));
 			}
 		}
 		usleep(100);
+		if (d->terminate && state == _eat)
+			ft_drop_forks(d, philo);
 	}
 	return (args);
 }
@@ -94,10 +88,11 @@ int	main(int argc, char **argv)
 		(d.args[this_thread]).d = &d;
 		printf("IN MAIN: Creating thread %d.\n", this_thread);
 		pthread_create(&(d.philosophers[this_thread]), NULL, \
-		ft_philosophise, &((d.args)[this_thread]));
+		ft_philosophise, &((d.args)[this_thread])); // Need to protect thread create too
 		this_thread++;
 	}
 	ft_start_clock(&d);
+	pthread_create(&d.monitor, NULL, monitor_philos, (void *)(&d));
 	printf("IN MAIN: All threads are created at %d.\n", ft_get_ms(&d));
 	while (!d.terminate)
 	{

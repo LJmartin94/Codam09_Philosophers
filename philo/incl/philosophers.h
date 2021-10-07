@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/07 14:15:20 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 15:23:00 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	int					time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
 	pthread_t			*philosophers;
+	pthread_t			monitor;
 	t_philo_thread_args	*args;
 	struct timeval		start_time;
 	int					terminate;
@@ -78,5 +79,6 @@ int	ft_mutex_init_failure(t_data *d);
 int	ft_mutex_destroy_failure(t_data *d);
 int ft_try_forks(t_data *d, int philo, int now);
 int ft_drop_forks(t_data *d, int philo);
+void	*monitor_philos(void *args);
 
 #endif
