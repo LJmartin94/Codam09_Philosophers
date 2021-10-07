@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/05 15:15:07 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 14:09:21 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,42 +23,45 @@ int check_ded(t_data	*d, int last_ate)
 void	*ft_philosophise(void *args)
 {
 	t_data	*d;
-	int		philosopher;
+	int		philo;
 	t_state	state;
-	int		last_ate;
-	// int		now;
 
 	d = ((t_philo_thread_args *)args)->d;
-	philosopher = ((t_philo_thread_args *)args)->thread_id + 1;
+	philo = ((t_philo_thread_args *)args)->thread_id + 1;
 	state = _think;
-	last_ate = 0;
+	pthread_mutex_lock(&(d->mutex_last_ate));
+	d->last_ate[philo - 1] = 0;
+	pthread_mutex_unlock(&(d->mutex_last_ate));
 	while (1 && !d->terminate)
 	{
-		// now = ft_get_ms(d);
-		if (ft_get_ms(d) >= (last_ate + d->time_to_die))
+		if (ft_get_ms(d) >= (d->last_ate[philo - 1] + d->time_to_die))
 		{
 			state = _ded;
 			if (!d->terminate)
-				ft_print_status(d, state, philosopher);
+				ft_print_status(d, state, philo);
 			d->terminate = 1;
 		}
-		else if (ft_get_ms(d) >= (last_ate + d->time_to_eat) && state == _eat)
+		else if (ft_get_ms(d) >= (d->last_ate[philo - 1] + d->time_to_eat) \
+		&& state == _eat)
 		{
 			state = _sleep;
-			ft_drop_forks(d, philosopher);
-			ft_print_status(d, state, philosopher);
+			ft_drop_forks(d, philo);
+			ft_print_status(d, state, philo);
 		}
-		else if (ft_get_ms(d) >= (last_ate + d->time_to_eat + d->time_to_sleep) && state == _sleep)
+		else if (ft_get_ms(d) >= (d->last_ate[philo - 1] + d->time_to_eat + \
+		d->time_to_sleep) && state == _sleep)
 		{
 			state = _think;
-			ft_print_status(d, state, philosopher);
+			ft_print_status(d, state, philo);
 		}
 		else if (state == _think)
 		{
-			if (ft_try_forks(d, philosopher, ft_get_ms(d)))
+			if (ft_try_forks(d, philo, ft_get_ms(d)))
 			{
 				state = _eat;
-				last_ate = ft_get_ms(d);
+				pthread_mutex_lock(&(d->mutex_last_ate));
+				d->last_ate[philo - 1] = ft_get_ms(d);
+				pthread_mutex_unlock(&(d->mutex_last_ate));
 			}
 		}
 		usleep(100);
