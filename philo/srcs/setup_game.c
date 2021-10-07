@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 19:47:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 13:45:44 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_data_null(t_data *d)
 	d->number_of_times_each_philosopher_must_eat = -1;
 	d->game_state_init = 0;
 	d->print_status_init = 0;
+	d->last_ate_init = 0;
 	d->forks_initialised = 0;
 	d->philosophers = NULL;
 	d->args = NULL;

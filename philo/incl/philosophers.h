@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/04 23:55:19 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 13:48:49 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ typedef struct s_data
 	t_philo_thread_args	*args;
 	struct timeval		start_time;
 	int					terminate;
+	int					*last_ate;
 	pthread_mutex_t		game_state;
 	pthread_mutex_t		print_status;
+	pthread_mutex_t		mutex_last_ate;
 	pthread_mutex_t		*forks;
 	int					game_state_init;
 	int					print_status_init;
+	int					last_ate_init;
 	int					forks_initialised;
 }	t_data;
 

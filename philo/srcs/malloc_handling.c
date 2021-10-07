@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:44:47 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/01 19:46:00 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 13:47:30 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	ft_malloc_all(t_data *d)
 	malloc(sizeof(t_philo_thread_args) * d->number_of_philosophers);
 	d->forks = (pthread_mutex_t *) \
 	malloc(sizeof(pthread_mutex_t) * d->number_of_philosophers);
-	if (!d->philosophers || !d->args || !d->forks)
+	d->last_ate = (int *) \
+	malloc(sizeof(int) * d->number_of_philosophers);
+	if (!d->philosophers || !d->args || !d->forks || !d->last_ate)
 		return (1);
 	return (0);
 }
