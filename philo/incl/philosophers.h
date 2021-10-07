@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/07 13:48:49 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 14:15:20 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data
 	int					print_status_init;
 	int					last_ate_init;
 	int					forks_initialised;
+	int					clock_started;
 }	t_data;
 
 int	ft_error_checker(int argc, char **argv, t_data *d);

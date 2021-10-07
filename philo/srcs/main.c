@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/07 14:09:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/07 14:28:49 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	*ft_philosophise(void *args)
 	pthread_mutex_lock(&(d->mutex_last_ate));
 	d->last_ate[philo - 1] = 0;
 	pthread_mutex_unlock(&(d->mutex_last_ate));
+	while (!d->clock_started)
+		usleep(100);
 	while (1 && !d->terminate)
 	{
 		if (ft_get_ms(d) >= (d->last_ate[philo - 1] + d->time_to_die))
@@ -85,7 +87,6 @@ int	main(int argc, char **argv)
 		return (ft_malloc_failure(&d));
 	if (ft_create_all_mutexes(&d))
 		return (1);
-	ft_start_clock(&d); //only do this after all threads are created. Start running threads once clock is started.
 	this_thread = 0;
 	while (this_thread < d.number_of_philosophers)
 	{
@@ -96,6 +97,7 @@ int	main(int argc, char **argv)
 		ft_philosophise, &((d.args)[this_thread]));
 		this_thread++;
 	}
+	ft_start_clock(&d);
 	printf("IN MAIN: All threads are created at %d.\n", ft_get_ms(&d));
 	while (!d.terminate)
 	{
