@@ -6,19 +6,11 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/12 15:42:08 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 16:53:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int check_ded(t_data	*d, int last_ate)
-{
-	if (ft_get_ms(d) >= (last_ate + d->time_to_die))
-		return (1);
-	else
-		return (0);
-}
 
 void	*monitor_philos(void *args)
 {
