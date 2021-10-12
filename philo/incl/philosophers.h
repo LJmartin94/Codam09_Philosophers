@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 19:14:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 21:24:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,21 @@ typedef struct s_data
 	int					clock_started;
 }	t_data;
 
-int	ft_error_checker(int argc, char **argv, t_data *d);
-int	ft_data_null(t_data *d);
-int	ft_malloc_all(t_data *d);
-int	ft_free_all(t_data *d);
-int	ft_create_all_mutexes(t_data *d);
-int	ft_destroy_all_mutexes(t_data *d);
-int	ft_start_clock(t_data *d);
-int	ft_get_ms(t_data *d);
-int	ft_print_status(t_data *d, t_state reason, int philo_id);
-int	ft_kill_all_threads(t_data *d);
-int	ft_malloc_failure(t_data *d);
-int	ft_mutex_init_failure(t_data *d);
-int	ft_mutex_destroy_failure(t_data *d);
-int ft_try_forks(t_data *d, int philo, int now, int *forks_held);
-int ft_drop_forks(t_data *d, int philo, int *forks_held);
+int		ft_error_checker(int argc, char **argv, t_data *d);
+int		ft_data_null(t_data *d);
+int		ft_malloc_all(t_data *d);
+int		ft_free_all(t_data *d);
+int		ft_create_all_mutexes(t_data *d);
+int		ft_destroy_all_mutexes(t_data *d);
+int		ft_start_clock(t_data *d);
+int		ft_get_ms(t_data *d);
+int		ft_print_status(t_data *d, t_state reason, int philo_id);
+int		ft_kill_all_threads(t_data *d);
+int		ft_malloc_failure(t_data *d);
+int		ft_mutex_init_failure(t_data *d);
+int		ft_mutex_destroy_failure(t_data *d);
+int		ft_try_forks(t_data *d, int philo, int now, int *forks_held);
+int		ft_drop_forks(t_data *d, int philo, int *forks_held);
 void	*monitor_philos(void *args);
 
 #endif
