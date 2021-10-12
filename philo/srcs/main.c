@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 21:55:23 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 22:53:18 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	behavioural_loop(t_data	*d, int philo, t_state *state, int *forks_held)
 	}
 	else if (*state == _think)
 	{
-		if (ft_try_forks(d, philo, ft_get_ms(d), forks_held))
+		if (ft_try_forks(d, philo, forks_held))
 		{
 			*state = _eat;
 			d->last_ate[philo - 1] = ft_get_ms(d);

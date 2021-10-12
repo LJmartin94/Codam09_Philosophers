@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/12 21:26:14 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 22:50:56 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@
 ** In this case, the last philo eats the very last (priority group 3).
 */
 
-int	ft_stagger(t_data *d, int philo, int now)
+int	ft_stagger(t_data *d, int philo)
 {
 	int	priority;
 	int	wait_time;
 
-	(void)now;
 	wait_time = 250;
 	if (philo % 2 == 0)
 		priority = 1;
@@ -45,7 +44,7 @@ int	ft_stagger(t_data *d, int philo, int now)
 ** Odd-numbers try left fork first, Even-numbers try right fork first.
 */
 
-int	ft_try_forks(t_data *d, int philo, int now, int *forks_held)
+int	ft_try_forks(t_data *d, int philo, int *forks_held)
 {
 	int	first_fork;
 	int	second_fork;
@@ -54,7 +53,7 @@ int	ft_try_forks(t_data *d, int philo, int now, int *forks_held)
 		return (0);
 	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
 	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
-	usleep(ft_stagger(d, philo, now));
+	usleep(ft_stagger(d, philo));
 	*forks_held = 1;
 	pthread_mutex_lock(&(d->forks[first_fork]));
 	ft_print_status(d, _fork, philo);
