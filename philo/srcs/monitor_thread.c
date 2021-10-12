@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/07 15:22:38 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 15:42:08 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ void	*monitor_philos(void *args)
 		
 		while (i < d->number_of_philosophers && !d->terminate)
 		{
-			if (now >= d->last_ate[i] + d->time_to_die)
+			if (now >= d->last_ate[i] + d->time_to_die && now > 0)
 				ft_print_status(d, _ded, (i+1));
 			else
 				i++;
 		}
+		usleep(100);
 	}	
 	return ((void *)0);
 }
