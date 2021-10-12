@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/05 15:15:00 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 17:54:21 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	ft_stagger(t_data *d, int philo, int now)
 	int priority;
 	int wait_time;
 
-	wait_time = 100;
+	(void)now;
+	wait_time = 250;
 	if (philo % 2 == 0)
 		priority = 1;
 	else if (!(d->number_of_philosophers % 2) ||\
@@ -37,9 +38,7 @@ int	ft_stagger(t_data *d, int philo, int now)
 		priority = 2;
 	else
 		priority = 3;
-	if (now <= d->time_to_eat)
-		return (wait_time * (priority - 1));
-	return (0);
+	return (wait_time * (priority - 1));
 }
 
 /*
@@ -55,8 +54,7 @@ int ft_try_forks(t_data *d, int philo, int now)
 		return (0);
 	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
 	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
-	if (now <= d->time_to_eat)
-		usleep(ft_stagger(d, philo, now));
+	usleep(ft_stagger(d, philo, now));
 	pthread_mutex_lock(&(d->forks[first_fork]));
 	ft_print_status(d, _fork, philo);
 	pthread_mutex_lock(&(d->forks[second_fork]));
