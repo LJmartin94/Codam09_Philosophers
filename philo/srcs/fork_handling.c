@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/12 22:50:56 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 22:59:34 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_stagger(t_data *d, int philo)
 ** Odd-numbers try left fork first, Even-numbers try right fork first.
 */
 
-int	ft_try_forks(t_data *d, int philo, int *forks_held)
+int	ft_try_forks(t_data *d, int philo, int *forks_held, t_state *state)
 {
 	int	first_fork;
 	int	second_fork;
@@ -61,6 +61,8 @@ int	ft_try_forks(t_data *d, int philo, int *forks_held)
 	pthread_mutex_lock(&(d->forks[second_fork]));
 	ft_print_status(d, _fork, philo);
 	ft_print_status(d, _eat, philo);
+	*state = _eat;
+	d->last_ate[philo - 1] = ft_get_ms(d);
 	return (1);
 }
 
