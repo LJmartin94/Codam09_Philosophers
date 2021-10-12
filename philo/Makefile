@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/10/07 15:23:27 by limartin      ########   odam.nl          #
+#    Updated: 2021/10/12 20:42:06 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC = $(SRC_PATH)main.c \
 	$(SRC_PATH)setup_game.c \
 	$(SRC_PATH)malloc_handling.c \
 	$(SRC_PATH)mutex_handling.c \
-	$(SRC_PATH)grab_forks.c \
+	$(SRC_PATH)fork_handling.c \
 	$(SRC_PATH)monitor_thread.c \
 	$(SRC_PATH)time.c \
 	$(SRC_PATH)print.c \
