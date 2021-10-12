@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/12 21:28:15 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/13 00:09:25 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	*monitor_philos(void *args)
 {
 	int		i;
 	int		now;
+	int		full_phils;
 	t_data	*d;
 
 	d = (t_data *)args;
@@ -24,15 +25,18 @@ void	*monitor_philos(void *args)
 	while (!d->terminate)
 	{
 		i = 0;
+		full_phils = 0;
 		now = ft_get_ms(d);
 		while (i < d->number_of_philosophers && !d->terminate)
 		{
 			if (now >= d->last_ate[i] + d->time_to_die && now > 0)
 				ft_print_status(d, _ded, (i + 1));
-			else
-				i++;
+			if (d->notepme > 0 && d->times_ate[i] >= d->notepme)
+				full_phils++;
+			i++;
 		}
-		usleep(100);
-	}	
+		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
+			d->terminate = 1;
+	}
 	return ((void *)0);
 }

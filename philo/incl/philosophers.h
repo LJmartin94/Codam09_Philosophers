@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 23:30:16 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 23:46:54 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_data
 	struct timeval		start_time;
 	int					terminate;
 	int					*last_ate;
+	int					*times_ate;
 	pthread_mutex_t		game_state;
 	pthread_mutex_t		print_status;
 	pthread_mutex_t		mutex_last_ate;
