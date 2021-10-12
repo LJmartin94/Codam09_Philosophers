@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 23:03:51 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 23:30:16 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_data
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					number_of_times_each_philosopher_must_eat;
+	int					notepme;
 	pthread_t			*philosophers;
 	pthread_t			monitor;
 	t_philo_thread_args	*args;

@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 23:21:59 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 23:31:51 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ You must supply 4-5 arguments, namely:\n \
 
 int	ft_error_checker(int argc, char **argv, t_data *d)
 {
-	d->number_of_times_each_philosopher_must_eat = -1;
+	d->notepme = -1;
 	if (argc < 5 || argc > 6)
 		return (incorrect_num_of_args());
 	if (atoi_error(argv[1], &(d->number_of_philosophers)))
@@ -56,11 +56,11 @@ int	ft_error_checker(int argc, char **argv, t_data *d)
 	if (atoi_error(argv[4], &(d->time_to_sleep)))
 		return (incorrect_arg_format(argv[4]));
 	if (argc == 6 && atoi_error(argv[5], \
-	&(d->number_of_times_each_philosopher_must_eat)))
+	&(d->notepme)))
 		return (incorrect_arg_format(argv[5]));
 	if (d->number_of_philosophers <= 0 || d->time_to_die < 0 || \
 	d->time_to_eat < 0 || d->time_to_sleep < 0 || \
-	(d->number_of_times_each_philosopher_must_eat <= 0 && argc == 6))
+	(d->notepme <= 0 && argc == 6))
 		return (invalid_arg());
 	return (0);
 }
