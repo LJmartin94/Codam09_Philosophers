@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 18:25:27 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 19:16:46 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*ft_philosophise(void *args)
 	t_data	*d;
 	int		philo;
 	t_state	state;
+	int		forks_held;
 
 	d = ((t_philo_thread_args *)args)->d;
 	philo = ((t_philo_thread_args *)args)->thread_id + 1;
@@ -39,7 +40,7 @@ void	*ft_philosophise(void *args)
 		&& state == _eat)
 		{
 			state = _sleep;
-			ft_drop_forks(d, philo);
+			ft_drop_forks(d, philo, &forks_held);
 			ft_print_status(d, state, philo);
 		}
 		else if (ft_get_ms(d) >= (d->last_ate[philo - 1] + d->time_to_eat + \
@@ -50,7 +51,7 @@ void	*ft_philosophise(void *args)
 		}
 		else if (state == _think)
 		{
-			if (ft_try_forks(d, philo, ft_get_ms(d)))
+			if (ft_try_forks(d, philo, ft_get_ms(d), &forks_held))
 			{
 				state = _eat;
 				// pthread_mutex_lock(&(d->mutex_last_ate));
@@ -59,14 +60,11 @@ void	*ft_philosophise(void *args)
 			}
 		}
 		usleep(100);
-		if (d->terminate && state == _eat)
-			ft_drop_forks(d, philo);
+		if (d->terminate)
+			ft_drop_forks(d, philo, &forks_held);
 	}
 	return (args);
 }
-
-// THERE ARE TWO PROBLEMS WITH THE CODE RIGHT NOW THAT I AM AWARE OF: 
-// PHILOS DIE, AND LOCK UP THE PROGRAM DUE TO UNRELEASED MUTEXES - E.G. 3 999 1000 1000.
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/12 17:54:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 19:14:49 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_stagger(t_data *d, int philo, int now)
 ** Odd-numbers try left fork first, Even-numbers try right fork first.
 */
 
-int ft_try_forks(t_data *d, int philo, int now)
+int ft_try_forks(t_data *d, int philo, int now, int *forks_held)
 {
 	int first_fork;
 	int second_fork;
@@ -55,25 +55,29 @@ int ft_try_forks(t_data *d, int philo, int now)
 	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
 	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
 	usleep(ft_stagger(d, philo, now));
+	*forks_held = 1;
 	pthread_mutex_lock(&(d->forks[first_fork]));
 	ft_print_status(d, _fork, philo);
+	*forks_held = 2;
 	pthread_mutex_lock(&(d->forks[second_fork]));
 	ft_print_status(d, _fork, philo);
 	ft_print_status(d, _eat, philo);
 	return (1);
 }
 
-int ft_drop_forks(t_data *d, int philo)
+int ft_drop_forks(t_data *d, int philo, int *forks_held)
 {
 	int first_fork;
 	int second_fork;
 
-	if (d->number_of_philosophers == 1)
+	if (d->number_of_philosophers == 1 || *forks_held == 0)
 		return (0);
 	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
 	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
-	pthread_mutex_unlock(&(d->forks[second_fork]));
+	if (*forks_held == 2)
+		pthread_mutex_unlock(&(d->forks[second_fork]));
 	pthread_mutex_unlock(&(d->forks[first_fork]));
+	*forks_held = 0;
 	return(1);
 }
 
