@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 21:24:23 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 22:27:58 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int		ft_malloc_all(t_data *d);
 int		ft_free_all(t_data *d);
 int		ft_create_all_mutexes(t_data *d);
 int		ft_destroy_all_mutexes(t_data *d);
+int		ft_create_threads(t_data *d);
+void	*ft_philosophise(void *args);
 int		ft_start_clock(t_data *d);
 int		ft_get_ms(t_data *d);
 int		ft_print_status(t_data *d, t_state reason, int philo_id);

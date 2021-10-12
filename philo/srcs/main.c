@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 21:21:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/12 21:55:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	*ft_philosophise(void *args)
 int	main(int argc, char **argv)
 {
 	t_data	d;
-	int		this_thread;
 
 	ft_data_null(&d);
 	if (ft_error_checker(argc, argv, &d))
@@ -78,28 +77,11 @@ int	main(int argc, char **argv)
 		return (ft_malloc_failure(&d));
 	if (ft_create_all_mutexes(&d))
 		return (1);
-	this_thread = 0;
-	while (this_thread < d.number_of_philosophers)
-	{
-		(d.args[this_thread]).thread_id = this_thread;
-		(d.args[this_thread]).d = &d;
-		printf("IN MAIN: Creating thread %d.\n", this_thread);
-		pthread_create(&(d.philosophers[this_thread]), NULL, \
-		ft_philosophise, &((d.args)[this_thread])); // Need to protect thread create too
-		this_thread++;
-	}
-	ft_start_clock(&d);
-	pthread_create(&d.monitor, NULL, monitor_philos, (void *)(&d));
-	printf("IN MAIN: All threads are created at %d.\n", ft_get_ms(&d));
+	ft_create_threads(&d);
 	while (!d.terminate)
-	{
 		usleep(100);
-	}
 	ft_kill_all_threads(&d);
 	ft_destroy_all_mutexes(&d);
 	ft_free_all(&d);
-	if (printf("MAIN program has ended at %d.\n", ft_get_ms(&d)))
-		return (0);
-	else
-		return (0);
+	return (0);
 }
