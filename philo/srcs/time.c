@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/29 15:08:19 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/07 14:18:40 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 00:35:12 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	ft_start_clock(t_data *d)
 {
 	gettimeofday(&(d->start_time), NULL);
-	d->clock_started = 1;
 	return (0);
 }
 

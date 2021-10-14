@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 23:41:24 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 00:37:18 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*monitor_philos(void *args)
 	t_data	*d;
 
 	d = (t_data *)args;
-	while (!d->clock_started)
-		usleep(100);
+	pthread_mutex_lock(&(d->game_state));
+	pthread_mutex_unlock(&(d->game_state));
 	while (!d->terminate)
 	{
 		i = 0;

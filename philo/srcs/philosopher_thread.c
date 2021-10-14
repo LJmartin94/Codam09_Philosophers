@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 23:44:13 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 00:37:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	*ft_philosophise(void *args)
 	//monitor mutex unlock
 	pta->times_ate = 0;
 	pta->forks_held = 0;
-	while (!pta->d->clock_started)
-		usleep(100);
+	pthread_mutex_lock(&(pta->d->game_state));
+	pthread_mutex_unlock(&(pta->d->game_state));
 	while (1 && !pta->d->terminate)
 	{
 		behavioural_loop(pta);
