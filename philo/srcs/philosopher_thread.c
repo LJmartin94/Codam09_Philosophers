@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 20:30:08 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 21:29:42 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,19 @@ int	ft_think(t_philo_thread_args *pta)
 
 void	behavioural_loop(t_philo_thread_args *pta)
 {
-	if (ft_get_ms(pta->d) >= (pta->d->last_ate[pta->thread_id] + \
-	pta->d->time_to_die))
+	int local_last_ate;
+
+	//monitor mutex lock
+	local_last_ate = pta->d->last_ate[pta->thread_id];
+	//monitor mutex unlock
+	//unnecessary?
+	if (ft_get_ms(pta->d) >= (local_last_ate + pta->d->time_to_die))
 		ft_die(pta);
-	else if (ft_get_ms(pta->d) >= (pta->d->last_ate[pta->thread_id] + \
+	//unnecessary?
+	else if (ft_get_ms(pta->d) >= (local_last_ate + 
 	pta->d->time_to_eat) && pta->state == _eat)
 		ft_sleep(pta);
-	else if (ft_get_ms(pta->d) >= (pta->d->last_ate[pta->thread_id] + \
+	else if (ft_get_ms(pta->d) >= (local_last_ate + \
 	pta->d->time_to_eat + pta->d->time_to_sleep) && pta->state == _sleep)
 		ft_think(pta);
 	else if (pta->state == _think)
@@ -58,8 +64,10 @@ void	*ft_philosophise(void *args)
 	pta = (t_philo_thread_args *)args;
 	pta->philo = pta->thread_id + 1;
 	pta->state = _think;
+	//monitor mutex lock
 	pta->d->last_ate[pta->thread_id] = 0;
 	pta->d->full[pta->thread_id] = 0;
+	//monitor mutex unlock
 	pta->times_ate = 0;
 	pta->forks_held = 0;
 	while (!pta->d->clock_started)
