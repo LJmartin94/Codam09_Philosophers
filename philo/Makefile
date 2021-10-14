@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/10/13 00:22:58 by limartin      ########   odam.nl          #
+#    Updated: 2021/10/14 19:44:12 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CC = gcc
 
 #TODO remove sanitise flag when submitting
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-CFLAGS = -Wall -Wextra -Werror -pthread 
+CFLAGS = -Wall -Wextra -Werror -pthread
 # -fsanitize=thread -g -O1
 
 HEADER_FILES = $(INCL_PATH)

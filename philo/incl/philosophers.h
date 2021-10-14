@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/12 23:46:54 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 16:28:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ typedef enum e_state
 
 typedef struct s_philo_thread_args
 {
-	int				thread_id;
 	struct s_data	*d;
+	int				thread_id;
+	int				philo;
+	t_state			state;
+	int				forks_held;
+	int				times_ate;
 }	t_philo_thread_args;
 
 typedef struct s_data
@@ -80,7 +84,7 @@ int		ft_kill_all_threads(t_data *d);
 int		ft_malloc_failure(t_data *d);
 int		ft_mutex_init_failure(t_data *d);
 int		ft_mutex_destroy_failure(t_data *d);
-int		ft_try_forks(t_data *d, int philo, int *forks_held, t_state *state);
+int		ft_try_forks(t_philo_thread_args *pta);
 int		ft_drop_forks(t_data *d, int philo, int *forks_held);
 void	*monitor_philos(void *args);
 

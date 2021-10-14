@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/12 23:54:27 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 16:37:53 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,26 @@ int	ft_stagger(t_data *d, int philo)
 ** Odd-numbers try left fork first, Even-numbers try right fork first.
 */
 
-int	ft_try_forks(t_data *d, int philo, int *forks_held, t_state *state)
+int	ft_try_forks(t_philo_thread_args *pta)
 {
 	int	first_fork;
 	int	second_fork;
 
-	if (d->number_of_philosophers == 1)
+	if (pta->d->number_of_philosophers == 1)
 		return (0);
-	first_fork = (philo - (philo % 2)) % d->number_of_philosophers;
-	second_fork = ((philo % 2) + (philo - 1)) % d->number_of_philosophers;
-	usleep(ft_stagger(d, philo));
-	*forks_held = 1;
-	pthread_mutex_lock(&(d->forks[first_fork]));
-	ft_print_status(d, _fork, philo);
-	*forks_held = 2;
-	pthread_mutex_lock(&(d->forks[second_fork]));
-	ft_print_status(d, _fork, philo);
-	ft_print_status(d, _eat, philo);
-	*state = _eat;
-	d->last_ate[philo - 1] = ft_get_ms(d);
-	d->times_ate[philo - 1] = d->times_ate[philo - 1] + 1;
+	first_fork = (pta->philo - (pta->philo % 2)) % pta->d->number_of_philosophers;
+	second_fork = ((pta->philo % 2) + (pta->philo - 1)) % pta->d->number_of_philosophers;
+	usleep(ft_stagger(pta->d, pta->philo));
+	pta->forks_held = 1;
+	pthread_mutex_lock(&(pta->d->forks[first_fork]));
+	ft_print_status(pta->d, _fork, pta->philo);
+	pta->forks_held = 2;
+	pthread_mutex_lock(&(pta->d->forks[second_fork]));
+	ft_print_status(pta->d, _fork, pta->philo);
+	ft_print_status(pta->d, _eat, pta->philo);
+	pta->state = _eat;
+	pta->d->last_ate[pta->thread_id] = ft_get_ms(pta->d);
+	pta->d->times_ate[pta->thread_id] = pta->d->times_ate[pta->thread_id] + 1;
 	return (1);
 }
 
