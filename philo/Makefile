@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/10/14 19:44:12 by limartin      ########   odam.nl          #
+#    Updated: 2021/10/14 23:52:44 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ bonus:
 	@echo "...but done ✨fancy✨"
 
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) notepme.txt
 	@echo "$(NAME) object files cleaned"
 
 fclean: clean

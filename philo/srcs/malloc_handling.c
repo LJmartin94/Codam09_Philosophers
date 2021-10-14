@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:44:47 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 20:30:52 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 23:49:39 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ int	ft_malloc_all(t_data *d)
 	malloc(sizeof(t_philo_thread_args) * d->number_of_philosophers);
 	d->forks = (pthread_mutex_t *) \
 	malloc(sizeof(pthread_mutex_t) * d->number_of_philosophers);
+	d->monitor_mutex = (pthread_mutex_t *) \
+	malloc(sizeof(pthread_mutex_t) * d->number_of_philosophers);
 	d->last_ate = (int *) \
 	malloc(sizeof(int) * d->number_of_philosophers);
 	d->full = (int *) \
 	malloc(sizeof(int) * d->number_of_philosophers);
 	if (!d->philosophers || !d->args || !d->forks || !d->last_ate \
-	|| !d->full)
+	|| !d->full || !d->monitor_mutex)
 		return (1);
 	return (0);
 }
@@ -41,6 +43,9 @@ int	ft_free_all(t_data *d)
 	if (d->forks)
 		free(d->forks);
 	d->forks = NULL;
+	if (d->monitor_mutex)
+		free(d->monitor_mutex);
+	d->monitor_mutex = NULL;
 	if (d->last_ate)
 		free(d->last_ate);
 	d->last_ate = NULL;

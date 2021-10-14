@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 21:10:45 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 23:41:24 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	*monitor_philos(void *args)
 		while (i < d->number_of_philosophers && !d->terminate)
 		{
 			//monitor mutex lock
+			pthread_mutex_lock(&(d->monitor_mutex[i]));
 			if (now >= d->last_ate[i] + d->time_to_die && now > 0)
 				ft_print_status(d, _ded, (i + 1));
 			if (d->notepme > 0 && d->full[i] == 1)
 				full_phils++;
+			pthread_mutex_unlock(&(d->monitor_mutex[i]));
 			//monitor mutex unlock
 			i++;
 		}

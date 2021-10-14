@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 21:29:42 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 23:44:13 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void	behavioural_loop(t_philo_thread_args *pta)
 	int local_last_ate;
 
 	//monitor mutex lock
+	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	local_last_ate = pta->d->last_ate[pta->thread_id];
+	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
 	//monitor mutex unlock
 	//unnecessary?
 	if (ft_get_ms(pta->d) >= (local_last_ate + pta->d->time_to_die))
@@ -65,8 +67,10 @@ void	*ft_philosophise(void *args)
 	pta->philo = pta->thread_id + 1;
 	pta->state = _think;
 	//monitor mutex lock
+	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	pta->d->last_ate[pta->thread_id] = 0;
 	pta->d->full[pta->thread_id] = 0;
+	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
 	//monitor mutex unlock
 	pta->times_ate = 0;
 	pta->forks_held = 0;

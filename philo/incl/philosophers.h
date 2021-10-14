@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/14 23:26:50 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 23:37:22 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_data
 	pthread_mutex_t		*forks;
 	int					game_state_init;
 	int					print_status_init;
-	int					last_ate_init;
+	int					monitors_init;
 	int					forks_initialised;
 	int					clock_started;
 }	t_data;
