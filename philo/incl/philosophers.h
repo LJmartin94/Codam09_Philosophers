@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/15 00:37:02 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 01:22:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_data
 	int					terminate;
 	int					*last_ate;
 	int					*full;
+	int					*game_over;
 	pthread_mutex_t		game_state;
 	pthread_mutex_t		print_status;
 	pthread_mutex_t		*monitor_mutex;
@@ -86,5 +87,6 @@ int		ft_mutex_destroy_failure(t_data *d);
 int		ft_try_forks(t_philo_thread_args *pta);
 int		ft_drop_forks(t_data *d, int philo, int *forks_held);
 void	*monitor_philos(void *args);
+int		ft_game_over(t_data *d);
 
 #endif

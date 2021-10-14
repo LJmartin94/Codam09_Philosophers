@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/05 15:15:20 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 01:29:53 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_print_status(t_data *d, t_state reason, int philo_id)
 		if (reason == _ded)
 		{
 			printf(RED "%d Philo %d died\n" DEF, ms, philo_id);
-			d->terminate = 1;
+			ft_game_over(d);
 		}
 		else if (reason == _fork)
 			printf(YLW "%d Philo %d has taken a fork\n" DEF, ms, philo_id);

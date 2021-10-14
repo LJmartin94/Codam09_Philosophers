@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:44:47 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 23:49:39 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 01:15:29 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int	ft_malloc_all(t_data *d)
 	malloc(sizeof(int) * d->number_of_philosophers);
 	d->full = (int *) \
 	malloc(sizeof(int) * d->number_of_philosophers);
+	d->game_over = (int *) \
+	malloc(sizeof(int) * d->number_of_philosophers);
 	if (!d->philosophers || !d->args || !d->forks || !d->last_ate \
-	|| !d->full || !d->monitor_mutex)
+	|| !d->full || !d->monitor_mutex || !d->game_over)
 		return (1);
 	return (0);
 }
@@ -52,6 +54,9 @@ int	ft_free_all(t_data *d)
 	if (d->full)
 		free(d->full);
 	d->full = NULL;
+	if (d->game_over)
+		free(d->game_over);
+	d->game_over = NULL;
 	return (0);
 }
 

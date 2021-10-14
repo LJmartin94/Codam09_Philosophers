@@ -6,11 +6,28 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 00:37:18 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 01:23:03 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int		ft_game_over(t_data *d)
+{
+	int i;
+
+	i = 0;
+	pthread_mutex_lock(&(d->game_state));
+	while (i < d->number_of_philosophers)
+	{
+		pthread_mutex_lock(&(d->monitor_mutex[i]));
+		d->game_over[i] = 1;
+		pthread_mutex_unlock(&(d->monitor_mutex[i]));
+		i++;
+	}
+	pthread_mutex_unlock(&(d->game_state));
+	return (0);
+}
 
 void	*monitor_philos(void *args)
 {
@@ -40,7 +57,7 @@ void	*monitor_philos(void *args)
 			i++;
 		}
 		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
-			d->terminate = 1;
+			ft_game_over(d);
 	}
 	return ((void *)0);
 }
