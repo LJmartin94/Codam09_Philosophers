@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 16:38:03 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 20:30:08 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	*ft_philosophise(void *args)
 	pta->philo = pta->thread_id + 1;
 	pta->state = _think;
 	pta->d->last_ate[pta->thread_id] = 0;
+	pta->d->full[pta->thread_id] = 0;
 	pta->times_ate = 0;
 	pta->forks_held = 0;
 	while (!pta->d->clock_started)

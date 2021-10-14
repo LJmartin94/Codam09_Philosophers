@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/14 16:37:53 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/14 20:52:19 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int	ft_try_forks(t_philo_thread_args *pta)
 	ft_print_status(pta->d, _fork, pta->philo);
 	ft_print_status(pta->d, _eat, pta->philo);
 	pta->state = _eat;
+	pta->times_ate = pta->times_ate + 1;
 	pta->d->last_ate[pta->thread_id] = ft_get_ms(pta->d);
-	pta->d->times_ate[pta->thread_id] = pta->d->times_ate[pta->thread_id] + 1;
+	if (pta->d->notepme > 0 && pta->times_ate >= pta->d->notepme)
+		pta->d->full[pta->thread_id] = 1;
 	return (1);
 }
 
