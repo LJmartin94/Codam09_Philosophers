@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 02:47:23 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 13:25:40 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int	ft_print_status(t_data *d, t_state reason, int philo_id)
 	int	ms;
 
 	pthread_mutex_lock(&(d->print_status));
-	if (ft_continue(d, (philo_id - 1))) // continue not -1
+	// if (ft_continue(d, (philo_id - 1))) // continue not -1
+	if (ft_continue(d, (-1)))
 	{
 		ms = ft_get_ms(d);
 		if (reason == _ded)
 		{
 			printf(RED "%d Philo %d died\n" DEF, ms, philo_id);
-			ft_game_over(d);
+			ft_game_over(d, philo_id);
 		}
 		else if (reason == _fork)
 			printf(YLW "%d Philo %d has taken a fork\n" DEF, ms, philo_id);
