@@ -6,11 +6,30 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 01:23:03 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 02:12:16 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int		ft_continue(t_data *d, int index)
+{
+	int ret;
+
+	if (index == -1)
+	{
+		pthread_mutex_lock(&(d->game_state));
+		ret = !(d->terminate);
+		pthread_mutex_unlock(&(d->game_state));
+	}
+	else
+	{
+		pthread_mutex_lock(&(d->monitor_mutex[index]));
+		ret = !(d->game_over[index]);
+		pthread_mutex_unlock(&(d->monitor_mutex[index]));
+	}
+	return (ret);
+}
 
 int		ft_game_over(t_data *d)
 {
@@ -18,6 +37,7 @@ int		ft_game_over(t_data *d)
 
 	i = 0;
 	pthread_mutex_lock(&(d->game_state));
+	d->terminate = 1;
 	while (i < d->number_of_philosophers)
 	{
 		pthread_mutex_lock(&(d->monitor_mutex[i]));
@@ -39,12 +59,12 @@ void	*monitor_philos(void *args)
 	d = (t_data *)args;
 	pthread_mutex_lock(&(d->game_state));
 	pthread_mutex_unlock(&(d->game_state));
-	while (!d->terminate)
+	while (ft_continue(d, -1))
 	{
 		i = 0;
 		full_phils = 0;
 		now = ft_get_ms(d);
-		while (i < d->number_of_philosophers && !d->terminate)
+		while (i < d->number_of_philosophers && ft_continue(d, i))
 		{
 			//monitor mutex lock
 			pthread_mutex_lock(&(d->monitor_mutex[i]));

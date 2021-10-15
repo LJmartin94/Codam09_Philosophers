@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 01:29:53 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 02:25:55 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_print_status(t_data *d, t_state reason, int philo_id)
 	int	ms;
 
 	pthread_mutex_lock(&(d->print_status));
-	if (!d->terminate)
+	if (ft_continue(d, (philo_id - 1)))
 	{
 		ms = ft_get_ms(d);
 		if (reason == _ded)

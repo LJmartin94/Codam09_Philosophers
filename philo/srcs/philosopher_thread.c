@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 01:23:25 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 02:21:55 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_die(t_philo_thread_args *pta)
 {
 	pta->state = _ded;
-	if (!pta->d->terminate)
+	if (ft_continue(pta->d, pta->thread_id))
 		ft_print_status(pta->d, pta->state, pta->philo);
 	ft_game_over(pta->d);
 	return (0);
@@ -45,11 +45,12 @@ void	behavioural_loop(t_philo_thread_args *pta)
 	local_last_ate = pta->d->last_ate[pta->thread_id];
 	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
 	//monitor mutex unlock
-	//unnecessary?
-	if (ft_get_ms(pta->d) >= (local_last_ate + pta->d->time_to_die))
-		ft_die(pta);
-	//unnecessary?
-	else if (ft_get_ms(pta->d) >= (local_last_ate + 
+	// //unnecessary?
+	// if (ft_get_ms(pta->d) >= (local_last_ate + pta->d->time_to_die))
+	// 	ft_die(pta);
+	// //unnecessary?
+	//else 
+	if (ft_get_ms(pta->d) >= (local_last_ate + 
 	pta->d->time_to_eat) && pta->state == _eat)
 		ft_sleep(pta);
 	else if (ft_get_ms(pta->d) >= (local_last_ate + \
@@ -70,14 +71,13 @@ void	*ft_philosophise(void *args)
 	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	pta->d->last_ate[pta->thread_id] = 0;
 	pta->d->full[pta->thread_id] = 0;
-	pta->d->game_over[pta->thread_id] = 0;
 	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
 	//monitor mutex unlock
 	pta->times_ate = 0;
 	pta->forks_held = 0;
 	pthread_mutex_lock(&(pta->d->game_state));
 	pthread_mutex_unlock(&(pta->d->game_state));
-	while (1 && !pta->d->terminate)
+	while (1 && ft_continue(pta->d, pta->thread_id))
 	{
 		behavioural_loop(pta);
 		usleep(100);
