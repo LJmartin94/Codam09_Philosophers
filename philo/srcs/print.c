@@ -6,19 +6,30 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 13:25:40 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 14:04:47 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_continue_printing(t_data *d, t_state reason, int philo_id)
+{
+	int ret;
+
+	if (reason == _ded)
+		ret = !(d->game_over[philo_id - 1]);
+	else
+		ret = ft_continue(d, (philo_id - 1));
+	return (ret);
+}
 
 int	ft_print_status(t_data *d, t_state reason, int philo_id)
 {
 	int	ms;
 
 	pthread_mutex_lock(&(d->print_status));
-	// if (ft_continue(d, (philo_id - 1))) // continue not -1
-	if (ft_continue(d, (-1)))
+	//if (ft_continue_printing(d, reason, philo_id))
+	if (ft_continue(d, -1))
 	{
 		ms = ft_get_ms(d);
 		if (reason == _ded)
