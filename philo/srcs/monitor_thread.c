@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 02:12:16 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 02:45:52 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*monitor_philos(void *args)
 		i = 0;
 		full_phils = 0;
 		now = ft_get_ms(d);
-		while (i < d->number_of_philosophers && ft_continue(d, i))
+		while (i < d->number_of_philosophers && ft_continue(d, i)) //cont not -1
 		{
 			//monitor mutex lock
 			pthread_mutex_lock(&(d->monitor_mutex[i]));

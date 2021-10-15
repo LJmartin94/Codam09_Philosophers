@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 02:21:55 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/15 02:46:55 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_die(t_philo_thread_args *pta)
 {
 	pta->state = _ded;
-	if (ft_continue(pta->d, pta->thread_id))
+	if (ft_continue(pta->d, pta->thread_id)) //continue not -1
 		ft_print_status(pta->d, pta->state, pta->philo);
 	ft_game_over(pta->d);
 	return (0);
@@ -77,7 +77,7 @@ void	*ft_philosophise(void *args)
 	pta->forks_held = 0;
 	pthread_mutex_lock(&(pta->d->game_state));
 	pthread_mutex_unlock(&(pta->d->game_state));
-	while (1 && ft_continue(pta->d, pta->thread_id))
+	while (1 && ft_continue(pta->d, pta->thread_id)) //continue not -1
 	{
 		behavioural_loop(pta);
 		usleep(100);
