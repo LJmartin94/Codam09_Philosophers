@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/20 17:32:38 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/20 17:38:16 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	ft_think(t_philo_thread_args *pta)
 
 void	behavioural_loop(t_philo_thread_args *pta)
 {
-	int local_last_ate;
+	int	local_last_ate;
 
 	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	local_last_ate = pta->d->last_ate[pta->thread_id];
 	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
-	if (ft_get_ms(pta->d) >= (local_last_ate + 
+	if (ft_get_ms(pta->d) >= (local_last_ate + \
 	pta->d->time_to_eat) && pta->state == _eat)
 		ft_sleep(pta);
 	else if (ft_get_ms(pta->d) >= (local_last_ate + \

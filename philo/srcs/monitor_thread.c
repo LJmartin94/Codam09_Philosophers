@@ -6,15 +6,15 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 14:43:54 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/20 17:42:10 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int		ft_continue(t_data *d, int index)
+int	ft_continue(t_data *d, int index)
 {
-	int ret;
+	int	ret;
 
 	if (index == -1)
 	{
@@ -31,9 +31,9 @@ int		ft_continue(t_data *d, int index)
 	return (ret);
 }
 
-int		ft_game_over(t_data *d, int philo)
+int	ft_game_over(t_data *d, int philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_lock(&(d->game_state));
@@ -59,14 +59,12 @@ void	*monitor_philos(void *args)
 	t_data	*d;
 
 	d = (t_data *)args;
-	pthread_mutex_lock(&(d->game_state));
-	pthread_mutex_unlock(&(d->game_state));
 	while (ft_continue(d, -1))
 	{
 		i = 0;
 		full_phils = 0;
 		now = ft_get_ms(d);
-		while (i < d->number_of_philosophers && ft_continue(d, -1)) //cont needed? cont generic or specific?
+		while (i < d->number_of_philosophers && ft_continue(d, -1))
 		{
 			pthread_mutex_lock(&(d->monitor_mutex[i]));
 			if (now >= d->last_ate[i] + d->time_to_die && now > 0)

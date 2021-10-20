@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 13:16:43 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/20 17:42:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	ft_try_forks(t_philo_thread_args *pta)
 
 	if (pta->d->number_of_philosophers == 1)
 		return (0);
-	first_fork = (pta->philo - (pta->philo % 2)) % pta->d->number_of_philosophers;
-	second_fork = ((pta->philo % 2) + (pta->philo - 1)) % pta->d->number_of_philosophers;
+	first_fork = (pta->philo - (pta->philo % 2)) % \
+	pta->d->number_of_philosophers;
+	second_fork = ((pta->philo % 2) + (pta->philo - 1)) % \
+	pta->d->number_of_philosophers;
 	usleep(ft_stagger(pta->d, pta->philo));
 	pta->forks_held = 1;
 	pthread_mutex_lock(&(pta->d->forks[first_fork]));
