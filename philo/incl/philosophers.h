@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/10/15 14:52:33 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/20 18:05:17 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		ft_kill_all_threads(t_data *d);
 int		ft_malloc_failure(t_data *d);
 int		ft_mutex_init_failure(t_data *d);
 int		ft_mutex_destroy_failure(t_data *d);
+int		ft_thread_creation_error(t_data *d)
 int		ft_try_forks(t_philo_thread_args *pta);
 int		ft_drop_forks(t_data *d, int philo, int *forks_held);
 void	*monitor_philos(void *args);
