@@ -6,21 +6,11 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 14:52:17 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/20 17:32:38 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int	ft_die(t_philo_thread_args *pta)
-{
-	pta->state = _ded;
-	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id])); //causes a deadlock
-	if (!(pta->d->game_over[pta->thread_id]))
-		ft_print_status(pta->d, pta->state, pta->philo);
-	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
-	return (0);
-}
 
 int	ft_sleep(t_philo_thread_args *pta)
 {
@@ -44,11 +34,6 @@ void	behavioural_loop(t_philo_thread_args *pta)
 	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	local_last_ate = pta->d->last_ate[pta->thread_id];
 	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
-	// //unnecessary?
-	// if (ft_get_ms(pta->d) >= (local_last_ate + pta->d->time_to_die))
-	// 	ft_die(pta);
-	// //unnecessary?
-	//else 
 	if (ft_get_ms(pta->d) >= (local_last_ate + 
 	pta->d->time_to_eat) && pta->state == _eat)
 		ft_sleep(pta);
