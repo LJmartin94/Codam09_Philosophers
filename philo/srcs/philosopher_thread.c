@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/21 16:45:28 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/21 17:48:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	behavioural_loop(t_philo_thread_args *pta)
 	else if (now >= (local_last_ate + \
 	pta->d->time_to_eat + pta->d->time_to_sleep) && pta->state == _sleep)
 		ft_think(pta);
-	else if (pta->state == _think)
+	if (pta->state == _think)
 		ft_try_forks(pta);
 }
 
