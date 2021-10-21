@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/21 16:23:12 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/21 16:45:28 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*ft_philosophise(void *args)
 	while (ft_continue(pta->d, pta->thread_id))
 	{
 		behavioural_loop(pta);
-		usleep(200);
+		usleep(333);
 	}
 	ft_drop_forks(pta->d, pta->philo, &(pta->forks_held));
 	return (args);
