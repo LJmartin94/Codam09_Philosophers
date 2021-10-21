@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/21 16:14:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/21 16:23:12 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ int	ft_think(t_philo_thread_args *pta)
 void	behavioural_loop(t_philo_thread_args *pta)
 {
 	int	local_last_ate;
+	int now;
 
 	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	local_last_ate = pta->d->last_ate[pta->thread_id];
 	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
-	if (ft_get_ms(pta->d) >= (local_last_ate + \
+	now = ft_get_ms(pta->d);
+	if (now >= (local_last_ate + \
 	pta->d->time_to_eat) && pta->state == _eat)
 		ft_sleep(pta);
-	else if (ft_get_ms(pta->d) >= (local_last_ate + \
+	else if (now >= (local_last_ate + \
 	pta->d->time_to_eat + pta->d->time_to_sleep) && pta->state == _sleep)
 		ft_think(pta);
 	else if (pta->state == _think)
@@ -62,7 +64,7 @@ void	*ft_philosophise(void *args)
 	while (ft_continue(pta->d, pta->thread_id))
 	{
 		behavioural_loop(pta);
-		usleep(100);
+		usleep(200);
 	}
 	ft_drop_forks(pta->d, pta->philo, &(pta->forks_held));
 	return (args);
