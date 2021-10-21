@@ -1,12 +1,20 @@
+3 181 60 60
+no one should die
+2 121 60 60
+no one should die
+199 181 60 60
+no one should die (theoretically)
+200 121 60 60
+no one should die (theoretically)
+200 800 200 200
+no one should die
+105 800 200 200
+no one should die
+100 800 200 200
+no one should die
 5 800 200 200
 no one should die
 5 600 150 150
 no one should die
 4 410 200 200
-no one should die
-100 800 200 200
-no one should die
-105 800 200 200
-no one should die
-200 800 200 200
 no one should die
