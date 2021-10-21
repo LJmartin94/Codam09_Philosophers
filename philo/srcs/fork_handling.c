@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/20 17:42:57 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/21 15:22:34 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_try_forks(t_philo_thread_args *pta)
 	ft_print_status(pta->d, _fork, pta->philo);
 	pta->forks_held = 2;
 	pthread_mutex_lock(&(pta->d->forks[second_fork]));
-	ft_print_status(pta->d, _fork, pta->philo);
 	ft_print_status(pta->d, _eat, pta->philo);
 	pta->state = _eat;
 	pta->times_ate = pta->times_ate + 1;
