@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/21 16:14:41 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/21 18:14:58 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_stagger(t_data *d, int philo)
 	int	priority;
 	int	wait_time;
 
-	wait_time = 250;
+	wait_time = 333;
 	if (philo % 2 == 0)
 		priority = 1;
 	else if (!(d->number_of_philosophers % 2) || \
