@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/21 18:29:30 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/23 18:00:37 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_think(t_philo_thread_args *pta)
 void	behavioural_loop(t_philo_thread_args *pta)
 {
 	int	local_last_ate;
-	int now;
+	int	now;
 
 	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
 	local_last_ate = pta->d->last_ate[pta->thread_id];
@@ -64,9 +64,7 @@ void	*ft_philosophise(void *args)
 	while (ft_continue(pta->d, pta->thread_id))
 	{
 		behavioural_loop(pta);
-		// usleep(250);
-		// usleep(100 + pta->d->number_of_philosophers);
-		usleep(250);
+		usleep(100 + (pta->d->number_of_philosophers * 3 / 4));
 	}
 	ft_drop_forks(pta->d, pta->philo, &(pta->forks_held));
 	return (args);
