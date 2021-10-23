@@ -1,3 +1,5 @@
+3 500 100 8000
+A philo should die (at ~500ms, not ~8000ms+)
 3 300 100 100
 a philo should die
 2 200 100 100
@@ -13,6 +15,8 @@ no one should die, simulation should stop after 7 eats
 4 410 200 200 10
 no one should die, simulation should stop after 10 eats
 -5 600 200 200
+should error and not run (no crashing)
+0 600 200 200
 should error and not run (no crashing)
 4 -5 200 200
 should error and not run (no crashing)
