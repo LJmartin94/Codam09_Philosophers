@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/23 20:54:39 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/23 21:15:15 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	wait_your_turn(int now, int group, t_data *d)
 
 	groups = (d->number_of_philosophers % 2) + 2;
 	a_second_eat = d->time_to_eat * groups;
-	if (d->time_to_sleep > a_second_eat)
-		a_second_eat = d->time_to_sleep;
+	if ((d->time_to_sleep + d->time_to_eat) > a_second_eat)
+		a_second_eat = d->time_to_sleep + d->time_to_eat;
 	test_time = now % a_second_eat;
 	if (group == 0 && test_time >= 0 && test_time < d->time_to_eat)
 		return (0);
