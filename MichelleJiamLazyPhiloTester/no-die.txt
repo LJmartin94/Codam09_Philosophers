@@ -1,3 +1,7 @@
+3 650 200 150
+no one should die
+3 1600 500 60
+no one should die
 3 181 60 60
 no one should die
 2 121 60 60

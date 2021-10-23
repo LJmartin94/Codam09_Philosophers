@@ -6,7 +6,7 @@
 #    By: lindsay <lindsay@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/15 16:40:18 by lindsay       #+#    #+#                  #
-#    Updated: 2021/10/15 02:05:43 by limartin      ########   odam.nl          #
+#    Updated: 2021/10/23 20:31:17 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC = $(SRC_PATH)main.c \
 	$(SRC_PATH)philosopher_thread.c \
 	$(SRC_PATH)create_threads.c \
 	$(SRC_PATH)killthreads.c \
-	$(SRC_PATH)fork_handling.c \
+	$(SRC_PATH)alt_fork_handling.c \
 	$(SRC_PATH)time.c \
 	$(SRC_PATH)print.c \
 	$(UTILS_PATH)conversions.c \
