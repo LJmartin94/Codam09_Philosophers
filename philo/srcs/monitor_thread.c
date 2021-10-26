@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/23 18:02:30 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/26 16:28:58 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ int	ft_game_over(t_data *d, int philo)
 	return (0);
 }
 
+int	check_philo(int *i, int now, int *full_phils, t_data *d)
+{
+	pthread_mutex_lock(&(d->monitor_mutex[*i]));
+	if (now >= d->last_ate[*i] + d->time_to_die && now > 0)
+		ft_print_status(d, _ded, (*i + 1));
+	if (d->notepme > 0 && d->full[*i] == 1)
+		(*full_phils)++;
+	pthread_mutex_unlock(&(d->monitor_mutex[*i]));
+	(*i)++;
+	return (0);
+}
+
 void	*monitor_philos(void *args)
 {
 	int		i;
@@ -66,17 +78,11 @@ void	*monitor_philos(void *args)
 		now = ft_get_ms(d);
 		while (i < d->number_of_philosophers && ft_continue(d, -1))
 		{
-			pthread_mutex_lock(&(d->monitor_mutex[i]));
-			if (now >= d->last_ate[i] + d->time_to_die && now > 0)
-				ft_print_status(d, _ded, (i + 1));
-			if (d->notepme > 0 && d->full[i] == 1)
-				full_phils++;
-			pthread_mutex_unlock(&(d->monitor_mutex[i]));
-			i++;
+			check_philo(&i, now, &full_phils, d);
 		}
 		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
 			ft_game_over(d, -1);
+		usleep(200 / d->number_of_philosophers);
 	}
-	usleep(200 / d->number_of_philosophers);
 	return ((void *)0);
 }
