@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 21:32:55 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/21 14:44:29 by limartin      ########   odam.nl         */
+/*   Updated: 2021/10/28 21:24:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	partial_thread_killer(int status, t_data *d)
 	ft_game_over(d, -1);
 	if (status == -1)
 		status = d->number_of_philosophers;
-	while (i < d->number_of_philosophers)
+	while (i < status)
 	{
 		pthread_join(d->philosophers[i], NULL);
 		i++;
