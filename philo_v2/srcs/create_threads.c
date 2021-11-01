@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 21:32:55 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/28 21:24:57 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/01 17:53:56 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	ft_create_threads(t_data *d)
 	{
 		(d->args[this_thread]).thread_id = this_thread;
 		(d->args[this_thread]).d = d;
-		d->game_over[this_thread] = 0;
 		if (pthread_create(&(d->philosophers[this_thread]), NULL, \
 		ft_philosophise, &((d->args)[this_thread])))
 			return (partial_thread_killer(this_thread, d));

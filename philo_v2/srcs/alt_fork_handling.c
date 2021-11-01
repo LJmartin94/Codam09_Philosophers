@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/23 21:15:15 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/01 17:57:10 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_stagger(t_data *d, int philo)
 ** Odd-numbers try left fork first, Even-numbers try right fork first.
 */
 
-int	ft_try_forks(t_philo_thread_args *pta)
+int	ft_try_forks(t_philo_thread_args *pta, int *last_ate)
 {
 	int	first_fork;
 	int	second_fork;
@@ -74,11 +74,12 @@ int	ft_try_forks(t_philo_thread_args *pta)
 	ft_print_status(pta->d, _eat, pta->philo);
 	pta->state = _eat;
 	pta->times_ate = pta->times_ate + 1;
-	pthread_mutex_lock(&(pta->d->monitor_mutex[pta->thread_id]));
-	pta->d->last_ate[pta->thread_id] = ft_get_ms(pta->d);
+	pthread_mutex_lock(&(pta->d->game_state));
+	*last_ate = ft_get_ms(pta->d);
+	pta->d->last_ate[pta->thread_id] = *last_ate;
 	if (pta->d->notepme > 0 && pta->times_ate >= pta->d->notepme)
 		pta->d->full[pta->thread_id] = 1;
-	pthread_mutex_unlock(&(pta->d->monitor_mutex[pta->thread_id]));
+	pthread_mutex_unlock(&(pta->d->game_state));
 	return (1);
 }
 

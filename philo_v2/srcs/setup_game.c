@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/10/15 02:08:36 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/01 16:27:38 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_data_null(t_data *d)
 	d->notepme = -1;
 	d->game_state_init = 0;
 	d->print_status_init = 0;
-	d->monitors_init = 0;
 	d->forks_initialised = 0;
 	d->philosophers = NULL;
 	d->args = NULL;
