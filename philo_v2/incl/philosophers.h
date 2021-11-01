@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/01 19:38:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/01 19:56:36 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	*ft_philosophise(void *args);
 int		ft_start_clock(t_data *d);
 int		ft_get_ms(t_data *d);
 int 	ft_request_print(t_data *d, t_state reason, int philo_id, int authority);
-int		xt_print_status(t_data *d, t_state reason, int philo_id);
+int		ft_print_status(t_data *d, t_state reason, int philo_id, int unused);
 int		ft_kill_all_threads(t_data *d);
 int		ft_malloc_failure(t_data *d);
 int		ft_mutex_init_failure(t_data *d);

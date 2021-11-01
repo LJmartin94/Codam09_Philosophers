@@ -6,13 +6,13 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/01 19:50:03 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/01 19:57:08 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	xt_print_status(t_data *d, t_state reason, int philo_id, int unused)
+int	ft_print_status(t_data *d, t_state reason, int philo_id, int unused)
 {
 	int	ms;
 
@@ -43,14 +43,14 @@ int ft_request_print(t_data *d, t_state reason, int philo_id, int authority)
 	{
 		pthread_mutex_lock(&(d->print_status));
 		if (ft_continue(d, -1))
-			xt_print_status(d, reason, philo_id);
+			ft_print_status(d, reason, philo_id, authority);
 		pthread_mutex_unlock(&(d->print_status));
 	}
 	else if (authority == 1)
 	{
 		pthread_mutex_lock(&(d->print_status));
 		if (!(d->terminate))
-			xt_print_status(d, reason, philo_id);
+			ft_print_status(d, reason, philo_id, authority);
 		pthread_mutex_unlock(&(d->print_status));
 	}
 	return (0);
