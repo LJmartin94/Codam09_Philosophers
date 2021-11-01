@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/01 17:52:34 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/01 19:51:16 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	ft_sleep(t_philo_thread_args *pta)
 {
 	pta->state = _sleep;
 	ft_drop_forks(pta->d, pta->philo, &(pta->forks_held));
-	ft_print_status(pta->d, pta->state, pta->philo);
+	ft_print_status(pta->d, pta->state, pta->philo, 0);
 	return (0);
 }
 
 int	ft_think(t_philo_thread_args *pta)
 {
 	pta->state = _think;
-	ft_print_status(pta->d, pta->state, pta->philo);
+	ft_print_status(pta->d, pta->state, pta->philo, 0);
 	return (0);
 }
 
