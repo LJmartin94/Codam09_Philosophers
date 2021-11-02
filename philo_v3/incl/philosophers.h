@@ -6,17 +6,17 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/02 17:09:27 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/02 18:14:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-// # include <stdio.h>
+# include <stdio.h>
 // # include <pthread.h>
 // # include <sys/time.h>
-// # include "utils.h"
+# include "utils.h"
 
 // # define RED "\033[0;31m"
 // # define GREEN "\033[0;32m"
@@ -44,13 +44,13 @@
 // 	int				times_ate;
 // }	t_philo_thread_args;
 
-// typedef struct s_data
-// {
-// 	int					number_of_philosophers;
-// 	int					time_to_die;
-// 	int					time_to_eat;
-// 	int					time_to_sleep;
-// 	int					notepme;
+typedef struct s_data
+{
+	int					number_of_philosophers;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					notepme;
 // 	pthread_t			*philosophers;
 // 	pthread_t			monitor;
 // 	t_philo_thread_args	*args;
@@ -64,10 +64,10 @@
 // 	int					game_state_init;
 // 	int					print_status_init;
 // 	int					forks_initialised;
-// }	t_data;
+}	t_data;
 
-// int		ft_error_checker(int argc, char **argv, t_data *d);
-// int		ft_data_null(t_data *d);
+int		ft_data_null(t_data *d);
+int		ft_error_checker(int argc, char **argv, t_data *d);
 // int		ft_malloc_all(t_data *d);
 // int		ft_free_all(t_data *d);
 // int		ft_create_all_mutexes(t_data *d);
