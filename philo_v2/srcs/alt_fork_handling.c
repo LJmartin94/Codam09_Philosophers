@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/01 19:43:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/02 17:06:42 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int	ft_try_forks(t_philo_thread_args *pta, int *last_ate)
 	ft_stagger(pta->d, pta->philo);
 	pta->forks_held = 1;
 	pthread_mutex_lock(&(pta->d->forks[first_fork]));
-	ft_request_print(pta->d, _fork, pta->philo, 0);
+	ft_print_status(pta->d, _fork, pta->philo, 0);
 	pta->forks_held = 2;
 	pthread_mutex_lock(&(pta->d->forks[second_fork]));
-	ft_request_print(pta->d, _eat, pta->philo, 0);
+	ft_print_status(pta->d, _eat, pta->philo, 0);
 	pta->state = _eat;
 	pta->times_ate = pta->times_ate + 1;
 	pthread_mutex_lock(&(pta->d->game_state));
