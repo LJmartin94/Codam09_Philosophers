@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 15:56:05 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 18:29:04 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@
 // # define CYAN "\033[0;36m"
 // # define DEF "\033[0m"
 
-// typedef enum e_state
-// {
-// 	_fork,
-// 	_eat,
-// 	_sleep,
-// 	_think,
-// 	_ded
-// }	t_state;
+typedef enum e_state
+{
+	_think,
+	_fork,
+	_eat,
+	_sleep,
+	_ded
+}	t_state;
 
 typedef struct s_philo_thread_args
 {
 	struct s_data	*d;
 	int				thread_id;
-// 	int				philo;
-// 	t_state			state;
-// 	int				forks_held;
-// 	int				times_ate;
+	int				philo;
+	t_state			state;
+	int				forks_held;
+	int				times_ate;
 }	t_philo_thread_args;
 
 typedef struct s_data
@@ -62,8 +62,8 @@ typedef struct s_data
 	int					p_terminate;
 	struct timeval		start_time;
 	pthread_t			monitor;
-// 	int					*last_ate;
-// 	int					*full;
+	int					*last_ate;
+	int					*full;
 }	t_data;
 
 int		ft_data_null(t_data *d);
