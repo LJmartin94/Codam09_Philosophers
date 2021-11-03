@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/02 18:14:23 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 14:13:18 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include <stdio.h>
-// # include <pthread.h>
+# include <pthread.h>
 // # include <sys/time.h>
 # include "utils.h"
 
@@ -51,6 +51,12 @@ typedef struct s_data
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					notepme;
+	pthread_mutex_t		game_state;
+	int					game_state_init;
+	pthread_mutex_t		print_status;
+	int					print_status_init;
+	pthread_mutex_t		*forks;
+	int					forks_initialised;
 // 	pthread_t			*philosophers;
 // 	pthread_t			monitor;
 // 	t_philo_thread_args	*args;
@@ -58,20 +64,15 @@ typedef struct s_data
 // 	int					terminate;
 // 	int					*last_ate;
 // 	int					*full;
-// 	pthread_mutex_t		game_state;
-// 	pthread_mutex_t		print_status;
-// 	pthread_mutex_t		*forks;
-// 	int					game_state_init;
-// 	int					print_status_init;
-// 	int					forks_initialised;
 }	t_data;
 
 int		ft_data_null(t_data *d);
 int		ft_error_checker(int argc, char **argv, t_data *d);
-// int		ft_malloc_all(t_data *d);
-// int		ft_free_all(t_data *d);
-// int		ft_create_all_mutexes(t_data *d);
-// int		ft_destroy_all_mutexes(t_data *d);
+int		ft_malloc_all(t_data *d);
+int		ft_malloc_failure(t_data *d);
+int		ft_free_all(t_data *d);
+int		ft_create_all_mutexes(t_data *d);
+int		ft_destroy_all_mutexes(t_data *d);
 // int		ft_create_threads(t_data *d);
 // void	*ft_philosophise(void *args);
 // int		ft_start_clock(t_data *d);
@@ -79,7 +80,6 @@ int		ft_error_checker(int argc, char **argv, t_data *d);
 // int 	ft_request_print(t_data *d, t_state reason, int philo_id, int authority);
 // int		ft_print_status(t_data *d, t_state reason, int philo_id, int unused);
 // int		ft_kill_all_threads(t_data *d);
-// int		ft_malloc_failure(t_data *d);
 // int		ft_mutex_init_failure(t_data *d);
 // int		ft_mutex_destroy_failure(t_data *d);
 // int		ft_thread_creation_error(t_data *d);
