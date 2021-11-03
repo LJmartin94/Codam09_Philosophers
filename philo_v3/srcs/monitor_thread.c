@@ -6,31 +6,40 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 15:54:54 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 20:20:21 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// int	ft_continue(t_data *d, int index)
-// {
-// 	int	ret;
+int	cp_continue(t_data *d, char mode)
+{
+	int	ret;
 
-// 	(void)index;  //TODO: remove
-// 	pthread_mutex_lock(&(d->game_state));
-// 	ret = !(d->terminate);
-// 	pthread_mutex_unlock(&(d->game_state));
-// 	return (ret);
-// }
+	if (mode == 'p')
+		return(!(d->p_terminate));
+	if (mode == 'c')
+	{
+		pthread_mutex_lock(&(d->game_state));
+		ret = !(d->p_terminate);
+		pthread_mutex_unlock(&(d->game_state));
+		return (ret);
+	}
+	return(0);
+}
 
-// int	p_game_over(t_data *d)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	d->terminate = 1;
-// 	return (0);
-// }
+int	cp_game_over(t_data *d, char mode)
+{
+	if (mode == 'p')
+		d->p_terminate = 1;
+	else if (mode == 'c')
+	{
+		pthread_mutex_lock(&(d->game_state));
+		d->p_terminate = 1;
+		pthread_mutex_unlock(&(d->game_state));
+	}
+	return (0);
+}
 
 // int	check_philo(int *i, int now, int *full_phils, t_data *d)
 // {
