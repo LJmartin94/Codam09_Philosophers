@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 21:32:55 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 15:48:09 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 22:05:44 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	c_create_threads(t_data *d)
 		(d->args[this_thread]).d = d;
 		(d->args[this_thread]).thread_id = this_thread;
 		if (pthread_create(&(d->philosophers[this_thread]), NULL, \
-		ft_philosophise, &((d->args)[this_thread])))
+		c_philosophise, &((d->args)[this_thread])))
 			return (p_partial_thread_killer(this_thread, d));
 		this_thread++;
 	}
 	ft_start_clock(d);
-	if (pthread_create(&(d->monitor), NULL, monitor_philos, (void *)(d)))
+	if (pthread_create(&(d->monitor), NULL, c_monitor_philos, (void *)(d)))
 		return (p_partial_thread_killer(-1, d));
 	pthread_mutex_unlock(&(d->game_state));
 	return (0);

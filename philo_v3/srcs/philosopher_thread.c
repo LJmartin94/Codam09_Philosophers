@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 21:30:01 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 22:04:43 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	c_behavioural_loop(t_philo_thread_args *pta, int *last_ate, int *go)
 		*go = c_try_forks(pta, last_ate);
 }
 
-void	*ft_philosophise(void *args)
+void	*c_philosophise(void *args)
 {
 	t_philo_thread_args	*pta;
 	int	local_last_ate;

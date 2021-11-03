@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 20:20:41 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 22:04:52 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int		ft_create_all_mutexes(t_data *d);
 int		ft_destroy_all_mutexes(t_data *d);
 int		c_create_threads(t_data *d);
 int		c_kill_all_threads(t_data *d);
-void	*ft_philosophise(void *args);
-void	*monitor_philos(void *args);
+void	*c_philosophise(void *args);
+void	*c_monitor_philos(void *args);
 int		cp_continue(t_data *d, char mode);
 int		cp_game_over(t_data *d, char mode);
 int		ft_start_clock(t_data *d);
