@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/02 17:11:34 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:00:39 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@
 // 	return (ret);
 // }
 
-// int	ft_game_over(t_data *d, int philo)
+// int	pt_game_over(t_data *d)
 // {
 // 	int	i;
 
 // 	i = 0;
-// 	(void)philo; //TODO: remove
 // 	d->terminate = 1;
 // 	return (0);
 // }

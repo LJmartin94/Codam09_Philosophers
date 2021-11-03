@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 14:35:23 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:22:21 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ typedef struct s_data
 	int					forks_initialised;
 	t_philo_thread_args	*args;
 	pthread_t			*philosophers;
+	int					p_terminate;
 // 	pthread_t			monitor;
 // 	struct timeval		start_time;
-// 	int					terminate;
 // 	int					*last_ate;
 // 	int					*full;
 }	t_data;
@@ -73,13 +73,13 @@ int		ft_malloc_failure(t_data *d);
 int		ft_free_all(t_data *d);
 int		ft_create_all_mutexes(t_data *d);
 int		ft_destroy_all_mutexes(t_data *d);
-// int		ft_create_threads(t_data *d);
-// void	*ft_philosophise(void *args);
+int		c_create_threads(t_data *d);
+int		c_kill_all_threads(t_data *d);
+void	*ft_philosophise(void *args);
 // int		ft_start_clock(t_data *d);
 // int		ft_get_ms(t_data *d);
 // int 	ft_request_print(t_data *d, t_state reason, int philo_id, int authority);
 // int		ft_print_status(t_data *d, t_state reason, int philo_id, int unused);
-// int		ft_kill_all_threads(t_data *d);
 // int		ft_mutex_init_failure(t_data *d);
 // int		ft_mutex_destroy_failure(t_data *d);
 // int		ft_thread_creation_error(t_data *d);
