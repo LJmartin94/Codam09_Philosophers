@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 20:20:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 22:20:19 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,46 @@ int	cp_game_over(t_data *d, char mode)
 	return (0);
 }
 
-// int	check_philo(int *i, int now, int *full_phils, t_data *d)
-// {
-// 	if (now >= d->last_ate[*i] + d->time_to_die && now > 0)
-// 		ft_print_status(d, _ded, (*i + 1), 1);
-// 	if (d->notepme > 0 && d->full[*i] == 1)
-// 		(*full_phils)++;
-// 	(*i)++;
-// 	return (0);
-// }
-
-void	*monitor_philos(void *args)
+int	p_check_philo(int *i, int now, int *full_phils, t_data *d)
 {
-	(void)args;
-// 	int		i;
-// 	int		now;
-// 	int		full_phils;
-// 	t_data	*d;
+	int ret;
 
-// 	d = (t_data *)args;
-// 	while (ft_continue(d, -1))
-// 	{
-// 		pthread_mutex_lock(&(d->game_state)); // THESE MUTEXES CAUSE THE DEADLOCK
-// 		i = 0;
-// 		full_phils = 0;
-// 		now = ft_get_ms(d);
-// 		while (i < d->number_of_philosophers)
-// 		{
-// 			check_philo(&i, now, &full_phils, d);
-// 		}
-// 		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
-// 			ft_game_over(d, -1);
-// 		pthread_mutex_unlock(&(d->game_state)); // THESE MUTEXES CAUSE THE DEADLOCK
-// 		usleep(100);
-// 	}
+	ret = 1;
+	if (now >= d->p_last_ate[*i] + d->time_to_die && now > 0)
+	{
+		pthread_mutex_unlock(&(d->game_state));
+		ret = cp_request_print(d, _ded, (*i + 1), 'c');
+		pthread_mutex_lock(&(d->game_state));
+	}
+	if (d->notepme > 0 && d->p_full[*i] == 1)
+		(*full_phils)++;
+	(*i)++;
+	return (ret);
+}
+
+void	*c_monitor_philos(void *args)
+{
+	t_data	*d;
+	int		i;
+	int		now;
+	int		full_phils;
+	int		go;
+
+	d = (t_data *)args;
+
+	go = cp_continue(d, 'c');
+	while (go)
+	{
+		i = 0;
+		full_phils = 0;
+		now = ft_get_ms(d);
+		pthread_mutex_lock(&(d->game_state));
+		while (i < d->number_of_philosophers)
+			go = p_check_philo(&i, now, &full_phils, d);
+		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
+			go = cp_game_over(d, 'p');
+		pthread_mutex_unlock(&(d->game_state));
+		usleep(5000);
+	}
 	return ((void *)0);
 }
