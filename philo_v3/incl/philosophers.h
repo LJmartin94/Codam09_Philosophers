@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 18:29:04 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 20:20:41 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # include <sys/time.h>
 # include "utils.h"
 
-// # define RED "\033[0;31m"
-// # define GREEN "\033[0;32m"
-// # define BLUE "\033[0;34m"
-// # define YLW "\033[0;33m"
-// # define CYAN "\033[0;36m"
-// # define DEF "\033[0m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define BLUE "\033[0;34m"
+# define YLW "\033[0;33m"
+# define CYAN "\033[0;36m"
+# define DEF "\033[0m"
 
 typedef enum e_state
 {
@@ -59,11 +59,11 @@ typedef struct s_data
 	int					forks_initialised;
 	t_philo_thread_args	*args;
 	pthread_t			*philosophers;
-	int					p_terminate;
 	struct timeval		start_time;
 	pthread_t			monitor;
-	int					*last_ate;
-	int					*full;
+	int					p_terminate;
+	int					*p_last_ate;
+	int					*p_full;
 }	t_data;
 
 int		ft_data_null(t_data *d);
@@ -77,16 +77,16 @@ int		c_create_threads(t_data *d);
 int		c_kill_all_threads(t_data *d);
 void	*ft_philosophise(void *args);
 void	*monitor_philos(void *args);
+int		cp_continue(t_data *d, char mode);
+int		cp_game_over(t_data *d, char mode);
 int		ft_start_clock(t_data *d);
-// int		ft_get_ms(t_data *d);
-// int 	ft_request_print(t_data *d, t_state reason, int philo_id, int authority);
+int		ft_get_ms(t_data *d);
+int 	cp_request_print(t_data *d, t_state reason, int philo_id, char mode);
+int		c_try_forks(t_philo_thread_args *pta, int *last_ate);
+int		ft_drop_forks(t_data *d, int philo, int *forks_held);
 // int		ft_print_status(t_data *d, t_state reason, int philo_id, int unused);
 // int		ft_mutex_init_failure(t_data *d);
 // int		ft_mutex_destroy_failure(t_data *d);
 // int		ft_thread_creation_error(t_data *d);
-// int		ft_try_forks(t_philo_thread_args *pta, int *last_ate);
-// int		ft_drop_forks(t_data *d, int philo, int *forks_held);
-// int		ft_game_over(t_data *d, int philo);
-// int		ft_continue(t_data *d, int index);
 
 #endif

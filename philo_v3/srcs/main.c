@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 15:21:38 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 18:44:22 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (c_create_threads(&d))
 		return (1);
-// 	while (ft_continue(&d, -1))
-// 		usleep(1000);
+	while (cp_continue(&d, 'c'))
+		usleep(1000);
 	c_kill_all_threads(&d);
 	ft_destroy_all_mutexes(&d);
 	ft_free_all(&d);
