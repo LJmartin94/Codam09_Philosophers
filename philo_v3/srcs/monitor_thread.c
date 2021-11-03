@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 15:00:39 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:54:54 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // 	return (ret);
 // }
 
-// int	pt_game_over(t_data *d)
+// int	p_game_over(t_data *d)
 // {
 // 	int	i;
 
@@ -42,8 +42,9 @@
 // 	return (0);
 // }
 
-// void	*monitor_philos(void *args)
-// {
+void	*monitor_philos(void *args)
+{
+	(void)args;
 // 	int		i;
 // 	int		now;
 // 	int		full_phils;
@@ -65,5 +66,5 @@
 // 		pthread_mutex_unlock(&(d->game_state)); // THESE MUTEXES CAUSE THE DEADLOCK
 // 		usleep(100);
 // 	}
-// 	return ((void *)0);
-// }
+	return ((void *)0);
+}

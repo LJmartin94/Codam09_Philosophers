@@ -6,17 +6,17 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/29 15:08:19 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/02 17:16:22 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:44:49 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// int	ft_start_clock(t_data *d)
-// {
-// 	gettimeofday(&(d->start_time), NULL);
-// 	return (0);
-// }
+int	ft_start_clock(t_data *d)
+{
+	gettimeofday(&(d->start_time), NULL);
+	return (0);
+}
 
 // int	ft_get_ms(t_data *d)
 // {

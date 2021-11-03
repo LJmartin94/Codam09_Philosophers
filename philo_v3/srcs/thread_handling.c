@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 21:32:55 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 15:21:26 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:48:09 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	c_kill_all_threads(t_data *d)
 	pthread_mutex_lock(&(d->game_state));
 	d->p_terminate = 1;
 	pthread_mutex_unlock(&(d->game_state));
-// 	pthread_join(d->monitor, NULL);
+	pthread_join(d->monitor, NULL);
 	while (i < d->number_of_philosophers)
 	{
 		pthread_join(d->philosophers[i], NULL);
@@ -46,8 +46,8 @@ int	p_partial_thread_killer(int status, t_data *d)
 	i = 0;
 	d->p_terminate = 1;
 	pthread_mutex_unlock(&(d->game_state));
-	// if (status == -1)
-	// 	status = d->number_of_philosophers;
+	if (status == -1)
+		status = d->number_of_philosophers;
 	while (i < status)
 	{
 		pthread_join(d->philosophers[i], NULL);
@@ -72,9 +72,9 @@ int	c_create_threads(t_data *d)
 			return (p_partial_thread_killer(this_thread, d));
 		this_thread++;
 	}
-// 	ft_start_clock(d);
+	ft_start_clock(d);
+	if (pthread_create(&(d->monitor), NULL, monitor_philos, (void *)(d)))
+		return (p_partial_thread_killer(-1, d));
 	pthread_mutex_unlock(&(d->game_state));
-// 	if (pthread_create(&(d->monitor), NULL, monitor_philos, (void *)(d)))
-// 		return (partial_thread_killer(-1, d));
 	return (0);
 }

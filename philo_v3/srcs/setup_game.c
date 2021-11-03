@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:28:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 15:03:10 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:56:53 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_data_null(t_data *d)
 	d->print_status_init = 0;
 	d->forks_initialised = 0;
 	d->p_terminate = 0;
-// 	d->philosophers = NULL;
-// 	d->args = NULL;
-// 	d->forks = NULL;
+	d->philosophers = NULL;
+	d->args = NULL;
+	d->forks = NULL;
 	return (0);
 }

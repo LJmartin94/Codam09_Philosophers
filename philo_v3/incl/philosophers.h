@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 15:22:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 15:56:05 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <pthread.h>
-// # include <sys/time.h>
+# include <sys/time.h>
 # include "utils.h"
 
 // # define RED "\033[0;31m"
@@ -60,8 +60,8 @@ typedef struct s_data
 	t_philo_thread_args	*args;
 	pthread_t			*philosophers;
 	int					p_terminate;
-// 	pthread_t			monitor;
-// 	struct timeval		start_time;
+	struct timeval		start_time;
+	pthread_t			monitor;
 // 	int					*last_ate;
 // 	int					*full;
 }	t_data;
@@ -76,7 +76,8 @@ int		ft_destroy_all_mutexes(t_data *d);
 int		c_create_threads(t_data *d);
 int		c_kill_all_threads(t_data *d);
 void	*ft_philosophise(void *args);
-// int		ft_start_clock(t_data *d);
+void	*monitor_philos(void *args);
+int		ft_start_clock(t_data *d);
 // int		ft_get_ms(t_data *d);
 // int 	ft_request_print(t_data *d, t_state reason, int philo_id, int authority);
 // int		ft_print_status(t_data *d, t_state reason, int philo_id, int unused);
@@ -85,7 +86,6 @@ void	*ft_philosophise(void *args);
 // int		ft_thread_creation_error(t_data *d);
 // int		ft_try_forks(t_philo_thread_args *pta, int *last_ate);
 // int		ft_drop_forks(t_data *d, int philo, int *forks_held);
-// void	*monitor_philos(void *args);
 // int		ft_game_over(t_data *d, int philo);
 // int		ft_continue(t_data *d, int index);
 
