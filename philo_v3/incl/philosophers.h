@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 14:13:18 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 14:35:23 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@
 // 	_ded
 // }	t_state;
 
-// typedef struct s_philo_thread_args
-// {
-// 	struct s_data	*d;
-// 	int				thread_id;
+typedef struct s_philo_thread_args
+{
+	struct s_data	*d;
+	int				thread_id;
 // 	int				philo;
 // 	t_state			state;
 // 	int				forks_held;
 // 	int				times_ate;
-// }	t_philo_thread_args;
+}	t_philo_thread_args;
 
 typedef struct s_data
 {
@@ -57,9 +57,9 @@ typedef struct s_data
 	int					print_status_init;
 	pthread_mutex_t		*forks;
 	int					forks_initialised;
-// 	pthread_t			*philosophers;
+	t_philo_thread_args	*args;
+	pthread_t			*philosophers;
 // 	pthread_t			monitor;
-// 	t_philo_thread_args	*args;
 // 	struct timeval		start_time;
 // 	int					terminate;
 // 	int					*last_ate;

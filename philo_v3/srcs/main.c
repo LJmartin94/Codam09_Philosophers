@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:13:22 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 13:42:19 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 14:21:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_malloc_all(&d))
 		return (ft_malloc_failure(&d));
-// 	if (ft_create_all_mutexes(&d))
-// 		return (1);
+	if (ft_create_all_mutexes(&d))
+		return (1);
 // 	if (ft_create_threads(&d))
 // 		return (1);
 // 	while (ft_continue(&d, -1))

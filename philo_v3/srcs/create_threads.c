@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 21:32:55 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/02 17:11:02 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 14:37:18 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,24 @@
 // 	return (1);
 // }
 
-// int	ft_create_threads(t_data *d)
-// {
-// 	int		this_thread;
+int	ft_create_threads(t_data *d)
+{
+	int		this_thread;
 
-// 	this_thread = 0;
-// 	pthread_mutex_lock(&(d->game_state));
-// 	while (this_thread < d->number_of_philosophers)
-// 	{
-// 		(d->args[this_thread]).thread_id = this_thread;
-// 		(d->args[this_thread]).d = d;
+	this_thread = 0;
+	pthread_mutex_lock(&(d->game_state));
+	while (this_thread < d->number_of_philosophers)
+	{
+		(d->args[this_thread]).d = d;
+		(d->args[this_thread]).thread_id = this_thread;
 // 		if (pthread_create(&(d->philosophers[this_thread]), NULL, \
 // 		ft_philosophise, &((d->args)[this_thread])))
 // 			return (partial_thread_killer(this_thread, d));
-// 		this_thread++;
-// 	}
+		this_thread++;
+	}
 // 	ft_start_clock(d);
-// 	pthread_mutex_unlock(&(d->game_state));
+	pthread_mutex_unlock(&(d->game_state));
 // 	if (pthread_create(&(d->monitor), NULL, monitor_philos, (void *)(d)))
 // 		return (partial_thread_killer(-1, d));
-// 	return (0);
-// }
+	return (0);
+}

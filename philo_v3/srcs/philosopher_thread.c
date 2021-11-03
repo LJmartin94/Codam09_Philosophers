@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/02 17:15:25 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 14:30:37 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 // 		ft_try_forks(pta, local_last_ate);
 // }
 
-// void	*ft_philosophise(void *args)
-// {
+void	*ft_philosophise(void *args)
+{
 // 	t_philo_thread_args	*pta;
 // 	int	local_last_ate;
 
@@ -66,5 +66,5 @@
 // 		usleep(100 + (pta->d->number_of_philosophers * 3 / 4));
 // 	}
 // 	ft_drop_forks(pta->d, pta->philo, &(pta->forks_held));
-// 	return (args);
-// }
+	return (args);
+}
