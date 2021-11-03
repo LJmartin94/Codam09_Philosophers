@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 22:20:19 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:21:14 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	cp_continue(t_data *d, char mode)
 	int	ret;
 
 	if (mode == 'p')
-		return(!(d->p_terminate));
+		return (!(d->p_terminate));
 	if (mode == 'c')
 	{
 		pthread_mutex_lock(&(d->game_state));
@@ -25,7 +25,7 @@ int	cp_continue(t_data *d, char mode)
 		pthread_mutex_unlock(&(d->game_state));
 		return (ret);
 	}
-	return(0);
+	return (0);
 }
 
 int	cp_game_over(t_data *d, char mode)
@@ -43,7 +43,7 @@ int	cp_game_over(t_data *d, char mode)
 
 int	p_check_philo(int *i, int now, int *full_phils, t_data *d)
 {
-	int ret;
+	int	ret;
 
 	ret = 1;
 	if (now >= d->p_last_ate[*i] + d->time_to_die && now > 0)
@@ -67,7 +67,6 @@ void	*c_monitor_philos(void *args)
 	int		go;
 
 	d = (t_data *)args;
-
 	go = cp_continue(d, 'c');
 	while (go)
 	{

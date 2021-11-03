@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 21:32:55 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 22:05:44 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:14:48 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	c_kill_all_threads(t_data *d)
 int	ft_thread_creation_error(t_data *d)
 {
 	printf("Thread creation error: \n"
-			"A call to pthread_create failed to complete succesfully.\n"
-			"Program will exit.\n");
+		"A call to pthread_create failed to complete succesfully.\n"
+		"Program will exit.\n");
 	if (!ft_destroy_all_mutexes(d))
 		ft_free_all(d);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:46:44 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 14:15:41 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:18:50 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_mutex_destroy_failure(t_data *d)
 {
 	printf("A mutex failed to be destroyed correctly. "
-			"Attempting to destroy other mutexes, then program will exit.\n");
+		"Attempting to destroy other mutexes, then program will exit.\n");
 	if (!ft_destroy_all_mutexes(d))
 		ft_free_all(d);
 	return (1);

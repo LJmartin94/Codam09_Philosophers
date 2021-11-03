@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 20:03:40 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:34:10 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,16 @@ int	ft_stagger(t_data *d, int philo)
 
 int	c_try_forks(t_philo_thread_args *pta, int *last_ate)
 {
-	int	first_fork;
-	int	second_fork;
 	int	go_ret;
 
 	if (pta->d->number_of_philosophers == 1)
 		return (1);
-	first_fork = (pta->philo - (pta->philo % 2)) % \
-	pta->d->number_of_philosophers;
-	second_fork = ((pta->philo % 2) + (pta->philo - 1)) % \
-	pta->d->number_of_philosophers;
 	ft_stagger(pta->d, pta->philo);
 	pta->forks_held = 1;
-	pthread_mutex_lock(&(pta->d->forks[first_fork]));
+	pthread_mutex_lock(&(pta->d->forks[pta->first_fork]));
 	go_ret = cp_request_print(pta->d, _fork, pta->philo, 'c');
 	pta->forks_held = 2;
-	pthread_mutex_lock(&(pta->d->forks[second_fork]));
+	pthread_mutex_lock(&(pta->d->forks[pta->second_fork]));
 	go_ret = cp_request_print(pta->d, _eat, pta->philo, 'c');
 	*last_ate = ft_get_ms(pta->d);
 	pta->state = _eat;

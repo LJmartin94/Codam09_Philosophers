@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:17:02 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/02 18:07:17 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:23:29 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 static int	invalid_arg(void)
 {
 	printf("Error: Invalid argument passed. \n"
-	"All arguments should be greater than or equal to zero, "
-	"and there should be 1 to 200 philosophers.\n"
-	"If specified, number_of_times_each_philosopher_must_eat "
-	"must be greater than zero.\n");
+		"All arguments should be greater than or equal to zero, "
+		"and there should be 1 to 200 philosophers.\n"
+		"If specified, number_of_times_each_philosopher_must_eat "
+		"must be greater than zero.\n");
 	return (1);
 }
 
 static int	incorrect_arg_format(char *arg)
 {
 	printf("Parsing error: \n"
-	"Argument |%s| is incorrectly formatted.\n"
-	"Program will exit.\n", arg);
+		"Argument |%s| is incorrectly formatted.\n"
+		"Program will exit.\n", arg);
 	return (1);
 }
 
 static int	incorrect_num_of_args(void)
 {
 	printf("Error: Incorrect number of arguments specified.\n"
-	"You must supply 4-5 arguments, namely:\n"
-	"1) number_of_philosophers\n"
-	"2) time_to_die\n"
-	"3) time_to_eat\n"
-	"4) time_to_sleep\n"
-	"5) (OPTIONAL) number_of_times_each_philosopher_must_eat\n");
+		"You must supply 4-5 arguments, namely:\n"
+		"1) number_of_philosophers\n"
+		"2) time_to_die\n"
+		"3) time_to_eat\n"
+		"4) time_to_sleep\n"
+		"5) (OPTIONAL) number_of_times_each_philosopher_must_eat\n");
 	return (1);
 }
 

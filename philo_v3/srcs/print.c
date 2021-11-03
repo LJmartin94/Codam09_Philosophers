@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/21 17:42:59 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 21:59:48 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:15:36 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	cp_print_status(t_data *d, t_state reason, int philo_id, char mode)
 {
 	int	ms;
-	int ret;
+	int	ret;
 
 	ret = 1;
 	ms = ft_get_ms(d);
@@ -39,9 +39,9 @@ int	cp_print_status(t_data *d, t_state reason, int philo_id, char mode)
 	return (ret);
 }
 
-int cp_request_print(t_data *d, t_state reason, int philo_id, char mode)
+int	cp_request_print(t_data *d, t_state reason, int philo_id, char mode)
 {
-	int go_ret;
+	int	go_ret;
 
 	go_ret = 0;
 	pthread_mutex_lock(&(d->print_status));

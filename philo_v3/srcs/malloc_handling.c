@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/01 19:44:47 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/03 19:51:53 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/03 23:22:17 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int	ft_free_all(t_data *d)
 	d->philosophers = NULL;
 	free(d->forks);
 	d->forks = NULL;
-// 	free(d->last_ate);
-// 	d->last_ate = NULL;
-// 	free(d->full);
-// 	d->full = NULL;
+	free(d->p_last_ate);
+	d->p_last_ate = NULL;
+	free(d->p_full);
+	d->p_full = NULL;
 	return (0);
 }
 
@@ -66,7 +66,7 @@ int	ft_malloc_failure(t_data *d)
 {
 	ft_free_all(d);
 	printf("Memory allocation error: \n"
-			"A malloc call failed to complete succesfully.\n"
-			"Program will exit.\n");
+		"A malloc call failed to complete succesfully.\n"
+		"Program will exit.\n");
 	return (1);
 }
