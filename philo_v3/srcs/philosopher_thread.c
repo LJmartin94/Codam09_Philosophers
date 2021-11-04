@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 00:54:06 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 01:10:59 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	*c_philosophise(void *args)
 	while (go)
 	{
 		c_behavioural_loop(pta, &local_last_ate, &go);
-		accusleep(pta->d, 1000);
+		accusleep(pta->d, 500);
 		if (pta->d->notepme > 0 && pta->times_ate >= pta->d->notepme)
 			go = cp_continue(pta->d, 'c');
 	}

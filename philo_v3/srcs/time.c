@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/29 15:08:19 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 00:55:04 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 01:24:31 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,10 @@ int	accusleep(t_data *d, int micro_target)
 {
 	unsigned int	start;
 	unsigned int	target_time;
-	unsigned int	now;
-	double			delay_factor;
-	double			quart;
 
 	micro_target = micro_target * 9 / 10;
 	start = ft_get_micros(d);
 	target_time = start + micro_target;
-	usleep(micro_target / 4);
-	now = ft_get_micros(d);
-	quart = now - start;
-	delay_factor = quart / (micro_target / 4);
-	if (delay_factor >= 2.0)
-		usleep((micro_target - quart) / delay_factor);
-	else
-		usleep(micro_target - quart);
 	while(ft_get_micros(d) < target_time)
 		usleep(micro_target / 10);
 	return(0);

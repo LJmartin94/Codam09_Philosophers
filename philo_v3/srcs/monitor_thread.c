@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 00:52:55 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 01:10:46 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	*c_monitor_philos(void *args)
 		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
 			go = cp_game_over(d, 'p');
 		pthread_mutex_unlock(&(d->game_state));
-		accusleep(d, 5000);
+		accusleep(d, 2500);
 	}
 	return ((void *)0);
 }

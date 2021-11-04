@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 00:52:21 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 01:10:29 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_stagger(t_data *d, int philo)
 	while (wait_your_turn(now, group, d))
 	{
 		now = ft_get_ms(d);
-		accusleep(d, 1000);
+		accusleep(d, 500);
 	}
 	return (0);
 }
