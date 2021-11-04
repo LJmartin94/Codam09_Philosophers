@@ -6,11 +6,12 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/29 15:08:19 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 01:24:31 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 02:36:03 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <time.h>
 
 int	ft_start_clock(t_data *d)
 {
@@ -48,12 +49,21 @@ unsigned int	ft_get_micros(t_data *d)
 int	accusleep(t_data *d, int micro_target)
 {
 	unsigned int	start;
+	unsigned int	halfway;
 	unsigned int	target_time;
+	int				zeno;
 
 	micro_target = micro_target * 9 / 10;
 	start = ft_get_micros(d);
+	halfway = start + (micro_target / 2);
 	target_time = start + micro_target;
+	zeno = 1;
+	while(ft_get_micros(d) < halfway)
+	{
+		zeno = zeno * 2;
+		usleep((micro_target / 2) / zeno);
+	}
 	while(ft_get_micros(d) < target_time)
-		usleep(micro_target / 10);
+		usleep(micro_target / zeno);
 	return(0);
 }

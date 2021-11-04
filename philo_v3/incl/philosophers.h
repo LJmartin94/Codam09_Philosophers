@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/04 00:50:56 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 02:57:54 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo_thread_args
 	int				thread_id;
 	int				philo;
 	t_state			state;
+	int				state_time;
 	int				forks_held;
 	int				times_ate;
 	int				first_fork;

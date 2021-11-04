@@ -6,11 +6,30 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 01:10:59 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 03:12:11 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int intelliwait(t_philo_thread_args	*pta)
+{
+	int time_to_wait;
+	int now;
+
+	now = ft_get_ms(pta->d);
+	if (pta->state == _eat)
+		time_to_wait = (pta->state_time + pta->d->time_to_eat) - now;
+	if (pta->state == _sleep)
+		time_to_wait = (pta->state_time + pta->d->time_to_sleep) - now;
+	if (pta->state == _think)
+		time_to_wait = 0;
+	time_to_wait = time_to_wait * 1000 - 500;
+	if (time_to_wait < 0)
+		time_to_wait = 0;
+	accusleep(pta->d, time_to_wait);
+	return (time_to_wait);
+}
 
 int	c_dead(t_philo_thread_args *pta)
 {
@@ -24,6 +43,7 @@ int	c_sleep(t_philo_thread_args *pta)
 	int	go_ret;
 
 	pta->state = _sleep;
+	pta->state_time = ft_get_ms(pta->d);
 	ft_drop_forks(pta->d, pta->philo, &(pta->forks_held));
 	go_ret = cp_request_print(pta->d, pta->state, pta->philo, 'c');
 	return (go_ret);
@@ -34,6 +54,7 @@ int	c_think(t_philo_thread_args *pta)
 	int	go_ret;
 
 	pta->state = _think;
+	pta->state_time = ft_get_ms(pta->d);
 	go_ret = cp_request_print(pta->d, pta->state, pta->philo, 'c');
 	return (go_ret);
 }
@@ -72,7 +93,8 @@ void	*c_philosophise(void *args)
 	while (go)
 	{
 		c_behavioural_loop(pta, &local_last_ate, &go);
-		accusleep(pta->d, 500);
+		//accusleep(pta->d, 1000);
+		intelliwait(pta);
 		if (pta->d->notepme > 0 && pta->times_ate >= pta->d->notepme)
 			go = cp_continue(pta->d, 'c');
 	}

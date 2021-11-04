@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 01:10:29 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 02:59:49 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_stagger(t_data *d, int philo)
 	while (wait_your_turn(now, group, d))
 	{
 		now = ft_get_ms(d);
-		accusleep(d, 500);
+		accusleep(d, 1000);
 	}
 	return (0);
 }
@@ -68,6 +68,7 @@ int	c_try_forks(t_philo_thread_args *pta, int *last_ate)
 	pthread_mutex_lock(&(pta->d->forks[pta->second_fork]));
 	go_ret = cp_request_print(pta->d, _eat, pta->philo, 'c');
 	*last_ate = ft_get_ms(pta->d);
+	pta->state_time = *last_ate;
 	pta->state = _eat;
 	pta->times_ate = pta->times_ate + 1;
 	pthread_mutex_lock(&(pta->d->game_state));
