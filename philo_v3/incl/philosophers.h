@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/03 23:34:54 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/04 00:50:56 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int		ft_get_ms(t_data *d);
 int		cp_request_print(t_data *d, t_state reason, int philo_id, char mode);
 int		c_try_forks(t_philo_thread_args *pta, int *last_ate);
 int		ft_drop_forks(t_data *d, int philo, int *forks_held);
+int		accusleep(t_data *d, int micro_target);
 
 #endif
