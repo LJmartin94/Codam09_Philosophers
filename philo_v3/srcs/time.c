@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/29 15:08:19 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 02:36:03 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/20 08:04:55 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,13 @@ unsigned int	ft_get_micros(t_data *d)
 int	accusleep(t_data *d, int micro_target)
 {
 	unsigned int	start;
-	unsigned int	halfway;
 	unsigned int	target_time;
-	int				zeno;
 
-	micro_target = micro_target * 9 / 10;
 	start = ft_get_micros(d);
-	halfway = start + (micro_target / 2);
 	target_time = start + micro_target;
-	zeno = 1;
-	while(ft_get_micros(d) < halfway)
-	{
-		zeno = zeno * 2;
-		usleep((micro_target / 2) / zeno);
-	}
-	while(ft_get_micros(d) < target_time)
-		usleep(micro_target / zeno);
-	return(0);
+	if(ft_get_micros(d) < target_time)
+		usleep((micro_target / 2) + (micro_target / 4));
+	while (ft_get_micros(d) < target_time)
+		usleep(micro_target / 8);
+	return (0);
 }

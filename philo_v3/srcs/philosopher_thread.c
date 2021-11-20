@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 03:12:11 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/20 08:31:58 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int intelliwait(t_philo_thread_args	*pta)
 		time_to_wait = (pta->state_time + pta->d->time_to_sleep) - now;
 	if (pta->state == _think)
 		time_to_wait = 0;
-	time_to_wait = time_to_wait * 1000 - 500;
+	time_to_wait = time_to_wait * 1000;
 	if (time_to_wait < 0)
 		time_to_wait = 0;
 	accusleep(pta->d, time_to_wait);
@@ -64,7 +64,7 @@ void	c_behavioural_loop(t_philo_thread_args *pta, int *last_ate, int *go)
 	int	now;
 
 	now = ft_get_ms(pta->d);
-	if (now >= (*last_ate + pta->d->time_to_die))
+	if (now > (*last_ate + pta->d->time_to_die))
 		*go = c_dead(pta);
 	if (now >= (*last_ate + pta->d->time_to_eat) && pta->state == _eat)
 		*go = c_sleep(pta);
@@ -93,8 +93,8 @@ void	*c_philosophise(void *args)
 	while (go)
 	{
 		c_behavioural_loop(pta, &local_last_ate, &go);
-		//accusleep(pta->d, 1000);
-		intelliwait(pta);
+		// intelliwait(pta);
+		accusleep(pta->d, 500);
 		if (pta->d->notepme > 0 && pta->times_ate >= pta->d->notepme)
 			go = cp_continue(pta->d, 'c');
 	}

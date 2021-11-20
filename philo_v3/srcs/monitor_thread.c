@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/07 13:42:13 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 02:37:51 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/20 08:31:40 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	p_check_philo(int *i, int now, int *full_phils, t_data *d)
 	int	ret;
 
 	ret = 1;
-	if (now >= d->p_last_ate[*i] + d->time_to_die && now > 0)
+	if (now > d->p_last_ate[*i] + d->time_to_die && now > 0)
 	{
 		pthread_mutex_unlock(&(d->game_state));
 		ret = cp_request_print(d, _ded, (*i + 1), 'c');
@@ -79,7 +79,7 @@ void	*c_monitor_philos(void *args)
 		if (d->notepme > 0 && full_phils >= d->number_of_philosophers)
 			go = cp_game_over(d, 'p');
 		pthread_mutex_unlock(&(d->game_state));
-		accusleep(d, 5000);
+		accusleep(d, 500);
 	}
 	return ((void *)0);
 }

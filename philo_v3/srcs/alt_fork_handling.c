@@ -6,13 +6,13 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/04 02:59:49 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/20 09:16:05 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	wait_your_turn(int now, int group, t_data *d)
+int	wait_your_turn(int now, int group, t_data *d, int state_time)
 {
 	int	test_time;
 	int	groups;
@@ -35,17 +35,17 @@ int	wait_your_turn(int now, int group, t_data *d)
 		return (1);
 }
 
-int	ft_stagger(t_data *d, int philo)
+int	ft_stagger(t_data *d, int philo, int state_time)
 {
 	int	now;
 	int	group;
 
 	now = ft_get_ms(d);
 	group = philo % ((d->number_of_philosophers % 2) + 2);
-	while (wait_your_turn(now, group, d))
+	while (wait_your_turn(now, group, d, state_time))
 	{
 		now = ft_get_ms(d);
-		accusleep(d, 1000);
+		accusleep(d, 250);
 	}
 	return (0);
 }
@@ -60,7 +60,7 @@ int	c_try_forks(t_philo_thread_args *pta, int *last_ate)
 
 	if (pta->d->number_of_philosophers == 1)
 		return (1);
-	ft_stagger(pta->d, pta->philo);
+	ft_stagger(pta->d, pta->philo, pta->state_time);
 	pta->forks_held = 1;
 	pthread_mutex_lock(&(pta->d->forks[pta->first_fork]));
 	go_ret = cp_request_print(pta->d, _fork, pta->philo, 'c');
