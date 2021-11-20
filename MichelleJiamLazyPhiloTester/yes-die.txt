@@ -1,8 +1,8 @@
 3 500 100 8000
 A philo should die (at ~500ms, not ~8000ms+)
-3 300 100 100
+3 299 100 100
 a philo should die
-2 200 100 100
+2 199 100 100
 a philo should die
 1 800 200 200
 a philo should die
