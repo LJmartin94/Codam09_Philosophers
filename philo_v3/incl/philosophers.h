@@ -6,7 +6,7 @@
 /*   By: lindsay <lindsay@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/15 16:35:34 by lindsay       #+#    #+#                 */
-/*   Updated: 2021/11/04 02:57:54 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/21 16:42:12 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@
 # define YLW "\033[0;33m"
 # define CYAN "\033[0;36m"
 # define DEF "\033[0m"
-
-// # define RED ""
-// # define GREEN ""
-// # define BLUE ""
-// # define YLW ""
-// # define CYAN ""
-// # define DEF ""
 
 typedef enum e_state
 {
