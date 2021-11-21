@@ -6,41 +6,42 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/21 16:08:00 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/21 16:20:17 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	get_latency(int now, int turn_length, t_data *d, int group, int state_time)
+int	get_test_time(int now, int group, t_data *d, int state_time)
 {
-	int theoretical_last_think;
-	int start_of_turn;
-	int latency;
+	int	groups;
+	int	turn_length;
+	int	theoretical_last_think;
+	int	start_of_turn;
+	int	latency;
 
-	start_of_turn = now - (now % turn_length);
-	theoretical_last_think = start_of_turn + d->time_to_sleep + d->time_to_eat * (group + 1);
-	latency = state_time - theoretical_last_think;
-	while (latency < 0)
-		latency = latency + turn_length;
-	return(latency);
+	groups = (d->number_of_philosophers % 2) + 2;
+	turn_length = d->time_to_eat * groups;
+	if ((d->time_to_sleep + d->time_to_eat) > turn_length)
+		turn_length = d->time_to_sleep + d->time_to_eat;
+	latency = 0;
+	if (now >= turn_length)
+	{
+		start_of_turn = now - (now % turn_length);
+		theoretical_last_think = start_of_turn + d->time_to_sleep + \
+		d->time_to_eat * (group + 1);
+		latency = state_time - theoretical_last_think;
+		while (latency < 0)
+			latency = latency + turn_length;
+	}
+	return ((now - latency) % turn_length);
 }
 
 int	wait_your_turn(int now, int group, t_data *d, int state_time)
 {
 	int	test_time;
-	int	groups;
-	int	a_second_eat;
-	int latency;
 
-	groups = (d->number_of_philosophers % 2) + 2;
-	a_second_eat = d->time_to_eat * groups;
-	if ((d->time_to_sleep + d->time_to_eat) > a_second_eat)
-		a_second_eat = d->time_to_sleep + d->time_to_eat;
-	latency = 0;
-	if (now >= a_second_eat)
-		latency = get_latency(now, a_second_eat, d, group, state_time);
-	test_time = (now - latency) % a_second_eat;
+	test_time = get_test_time(now, group, d, state_time);
 	if (group == 0 && test_time >= 0 && test_time < d->time_to_eat)
 		return (0);
 	else if (group == 1 && test_time >= d->time_to_eat && \
