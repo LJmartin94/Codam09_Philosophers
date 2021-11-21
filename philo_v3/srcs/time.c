@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/09/29 15:08:19 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/20 08:04:55 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/21 16:07:31 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	accusleep(t_data *d, int micro_target)
 
 	start = ft_get_micros(d);
 	target_time = start + micro_target;
-	if(ft_get_micros(d) < target_time)
+	if (ft_get_micros(d) < target_time)
 		usleep((micro_target / 2) + (micro_target / 4));
 	while (ft_get_micros(d) < target_time)
 		usleep(micro_target / 8);

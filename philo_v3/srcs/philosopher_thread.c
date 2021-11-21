@@ -6,30 +6,11 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 23:10:22 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/20 08:31:58 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/21 16:06:52 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int intelliwait(t_philo_thread_args	*pta)
-{
-	int time_to_wait;
-	int now;
-
-	now = ft_get_ms(pta->d);
-	if (pta->state == _eat)
-		time_to_wait = (pta->state_time + pta->d->time_to_eat) - now;
-	if (pta->state == _sleep)
-		time_to_wait = (pta->state_time + pta->d->time_to_sleep) - now;
-	if (pta->state == _think)
-		time_to_wait = 0;
-	time_to_wait = time_to_wait * 1000;
-	if (time_to_wait < 0)
-		time_to_wait = 0;
-	accusleep(pta->d, time_to_wait);
-	return (time_to_wait);
-}
 
 int	c_dead(t_philo_thread_args *pta)
 {
@@ -93,7 +74,6 @@ void	*c_philosophise(void *args)
 	while (go)
 	{
 		c_behavioural_loop(pta, &local_last_ate, &go);
-		// intelliwait(pta);
 		accusleep(pta->d, 500);
 		if (pta->d->notepme > 0 && pta->times_ate >= pta->d->notepme)
 			go = cp_continue(pta->d, 'c');
