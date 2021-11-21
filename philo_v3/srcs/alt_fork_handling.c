@@ -6,26 +6,24 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/04 20:04:39 by limartin      #+#    #+#                 */
-/*   Updated: 2021/11/20 11:05:44 by limartin      ########   odam.nl         */
+/*   Updated: 2021/11/21 16:08:00 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-
-// A B C
-// A always thinks time to eat + time to sleep after its second eat
-// B always thinks time to eat + time to sleep after its second eat, which is time_to_eat after A's second eat
-// i.e. B always thinks time to eat * 2 + time to sleep after A's second eat
-
-
-int latency(int state_time, int projected_think)
+int	get_latency(int now, int turn_length, t_data *d, int group, int state_time)
 {
-	// return (0);
-	if (state_time - projected_think > 0)
-		return(state_time - projected_think);
-	else
-		return(0);
+	int theoretical_last_think;
+	int start_of_turn;
+	int latency;
+
+	start_of_turn = now - (now % turn_length);
+	theoretical_last_think = start_of_turn + d->time_to_sleep + d->time_to_eat * (group + 1);
+	latency = state_time - theoretical_last_think;
+	while (latency < 0)
+		latency = latency + turn_length;
+	return(latency);
 }
 
 int	wait_your_turn(int now, int group, t_data *d, int state_time)
@@ -33,16 +31,16 @@ int	wait_your_turn(int now, int group, t_data *d, int state_time)
 	int	test_time;
 	int	groups;
 	int	a_second_eat;
-	int my_last_think;
+	int latency;
 
 	groups = (d->number_of_philosophers % 2) + 2;
 	a_second_eat = d->time_to_eat * groups;
 	if ((d->time_to_sleep + d->time_to_eat) > a_second_eat)
 		a_second_eat = d->time_to_sleep + d->time_to_eat;
-	my_last_think = 0;
+	latency = 0;
 	if (now >= a_second_eat)
-		my_last_think = (now - a_second_eat) + d->time_to_eat * (group + 1) + d->time_to_sleep;
-	test_time = (now - latency(state_time, my_last_think)) % a_second_eat;
+		latency = get_latency(now, a_second_eat, d, group, state_time);
+	test_time = (now - latency) % a_second_eat;
 	if (group == 0 && test_time >= 0 && test_time < d->time_to_eat)
 		return (0);
 	else if (group == 1 && test_time >= d->time_to_eat && \
